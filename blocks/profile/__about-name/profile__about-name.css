@@ -4,3 +4,11 @@
     font-size: 18px;
     font-weight: 400;
 }
+
+@media (max-width: 450px) {
+    .profile__about-name {
+        font-size: 14px;
+        padding: 14px 0 36px 0;
+        text-align: center;
+    }
+}
