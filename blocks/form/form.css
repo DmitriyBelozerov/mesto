@@ -1,0 +1,12 @@
+.form {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 430px;
+    height: 330px;
+    border-radius: 10px;
+    position: relative;
+    padding: 35px;
+    box-sizing: border-box;
+}
