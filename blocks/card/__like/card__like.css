@@ -1,5 +1,7 @@
 .card__like {
-    background: none;
+    background: url(../../../images/likeButton.svg);
+    width: 22px;
+    height: 19px;
     border: none;
     box-shadow: none;
     margin: 0 20px 0 0;
@@ -7,3 +9,8 @@
     cursor: pointer;
     align-self: center;
 }
+
+.card__like:active {
+    background: url(../../../images/likeButtonBlack.svg);
+}
+
