@@ -1,4 +1,4 @@
-.form__input-about {
+.form__input {
     background: none;
     box-shadow: none;
     color: black;
@@ -9,4 +9,13 @@
     border-top: none;
     border-left: none;
     border-right: none;
+    font-size: 14px;
+    font-weight: 400;
+    outline: none;
+}
+
+@media (max-width: 450px) {
+    .form__input {
+        margin-bottom: 30px;;
+    }
 }

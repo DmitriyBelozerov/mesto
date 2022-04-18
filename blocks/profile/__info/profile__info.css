@@ -4,3 +4,9 @@
     grid-template-columns: auto 1fr;
     align-items: center;
 }
+
+@media (max-width: 450px) {
+    .profile__info {
+        margin-left: 45px;
+    }
+}
