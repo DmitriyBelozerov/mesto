@@ -25,54 +25,57 @@
         </div>
 
         <button class="profile__add-button hover" type="button" aria-label="add_profile"></button>
-
     </section>
 
-    <ul class="cards">
-        <li class="card">
-            <img src="images/karachaevsk.jpg" alt="Карачаевск" class="card__photo">
-            <h2 class="card__title">Карачаевск </h2>
-            <button class="card__like hover" type="button" aria-label="like"></button>
-        </li>
-        <li class="card">
-            <img src="images/elbrus.jpg" alt="Гора Эльбрус" class="card__photo">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button class="card__like hover" type="button" aria-label="like"></button>
-        </li>
-        <li class="card">
-            <img src="images/dombai.jpg" alt="Домбай" class="card__photo">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__like hover" type="button" aria-label="like"></button>
-        </li>
-        <li class="card">
-            <img src="images/elbrus.jpg" alt="Гора Эльбрус" class="card__photo">
-            <h2 class="card__title">Гора Эльбрус</h2>
-            <button class="card__like hover" type="button" aria-label="like"></button>
-        </li>
-        <li class="card">
-            <img src="images/dombai.jpg" alt="Домбай" class="card__photo">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__like hover" type="button" aria-label="like"></button>
-        </li>
-        <li class="card">
-            <img src="images/karachaevsk.jpg" alt="Карачаево-Черкессия" class="card__photo">
-            <h2 class="card__title">Карачаево-Черкессия</h2>
-            <button class="card__like hover" type="button" aria-label="like"></button>
-        </li>
-    </ul>
+    <section class="galary">
+        <ul class="cards">
+            <li class="card">
+                <img src="images/karachaevsk.jpg" alt="Карачаевск" class="card__photo">
+                <h2 class="card__title">Карачаевск </h2>
+                <button class="card__like hover" type="button" aria-label="like"></button>
+            </li>
+            <li class="card">
+                <img src="images/elbrus.jpg" alt="Гора Эльбрус" class="card__photo">
+                <h2 class="card__title">Гора Эльбрус</h2>
+                <button class="card__like hover" type="button" aria-label="like"></button>
+            </li>
+            <li class="card">
+                <img src="images/dombai.jpg" alt="Домбай" class="card__photo">
+                <h2 class="card__title">Домбай</h2>
+                <button class="card__like hover" type="button" aria-label="like"></button>
+            </li>
+            <li class="card">
+                <img src="images/elbrus.jpg" alt="Гора Эльбрус" class="card__photo">
+                <h2 class="card__title">Гора Эльбрус</h2>
+                <button class="card__like hover" type="button" aria-label="like"></button>
+            </li>
+            <li class="card">
+                <img src="images/dombai.jpg" alt="Домбай" class="card__photo">
+                <h2 class="card__title">Домбай</h2>
+                <button class="card__like hover" type="button" aria-label="like"></button>
+            </li>
+            <li class="card">
+                <img src="images/karachaevsk.jpg" alt="Карачаево-Черкессия" class="card__photo">
+                <h2 class="card__title">Карачаево-Черкессия</h2>
+                <button class="card__like hover" type="button" aria-label="like"></button>
+            </li>
+        </ul>
+    </section>
 
     <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
     <div class="popup">
-        <form class="form" name="form_input-name" onsubmit="return false">
+        <div class="form" name="form_input-name">
             <button class="form__close hover" type="button" aria-label="close"></button>
             <h3 class="form__title">Редактировать профиль</h3>
-            <input class="form__input form__input_type_name" type="text" name="input-name" value="">
-            <input class="form__input form__input_type_about" type="text" name="input-about" value="">
-            <button class="form__submit hover" type="submit">Сохранить</button>
-        </form>
+            <form class="form__sending" action="#">
+                <input class="form__input form__input_type_name" type="text" name="input-name" value="">
+                <input class="form__input form__input_type_about" type="text" name="input-about" value="">
+                <button class="form__submit" type="submit">Сохранить</button>
+            </form>
+        </div>
     </div>
 
     <script src="scripts/index.js"></script>

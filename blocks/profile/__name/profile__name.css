@@ -13,5 +13,7 @@
     .profile__name {
         font-size: 27px;
         padding: 0;
+        margin-right: 10px;
+        margin-left: 25px;
     }
 }

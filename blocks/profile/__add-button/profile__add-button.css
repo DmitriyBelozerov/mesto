@@ -10,9 +10,10 @@
     border-radius: 2px;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 320px) {
     .profile__add-button {
         width: 282px;
         height: 50px;
+        background-size: 16px;
     }
 }
