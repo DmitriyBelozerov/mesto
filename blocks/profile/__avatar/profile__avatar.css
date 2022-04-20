@@ -3,7 +3,7 @@
     height: 120px;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 650px) {
     .profile__avatar {
         padding-bottom: 26px;
     }

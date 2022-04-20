@@ -22,10 +22,11 @@ let formSubmit = document.querySelector('.form');
 let nameProfile = document.querySelector('.profile__name');
 let aboutProfile = document.querySelector('.profile__about-name');
 
-function formSubmitHandler() {
+function formSubmitHandler(e) {
+    e.preventDefault();
     nameProfile.textContent = formNameElement.value;
     aboutProfile.textContent = formJobNameElement.value;
-    editForm.classList.toggle('popup_opened');
+    formEditClose();
 }
 
 formSubmit.addEventListener('submit', formSubmitHandler);

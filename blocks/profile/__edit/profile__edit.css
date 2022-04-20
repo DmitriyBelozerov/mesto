@@ -8,9 +8,18 @@
     padding: 0;
     cursor: pointer;
     border: solid #FFF 1px;
+    opacity: 1;
+    transition: opacity 0.5s linear 0s;
 }
 
-@media (max-width: 450px) {
+
+.profile__edit:hover {
+    opacity: 0.6;
+}
+
+
+
+@media (max-width: 650px) {
     .profile__edit {
         width: 18px;
         height: 18px;

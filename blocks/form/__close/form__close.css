@@ -12,7 +12,14 @@
     position: absolute;
     top: -35px;
     right: -35px;
+    opacity: 1;
+    transition: opacity 0.5s linear 0s;
 }
+
+.form__close:hover {
+    opacity: 0.6;
+}
+
 
 @media (max-width: 530px) {
     .form__close {

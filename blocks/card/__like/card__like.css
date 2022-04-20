@@ -8,9 +8,16 @@
     padding: 0;
     cursor: pointer;
     align-self: center;
+    opacity: 1;
+    transition: opacity 0.5s linear 0s;
+}
+
+
+.card__like:hover {
+    opacity: 0.5;
 }
 
 .card__like:active {
     background: url(../../../images/likeButtonBlack.svg);
+    opacity: 1;
 }
-

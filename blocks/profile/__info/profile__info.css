@@ -3,9 +3,10 @@
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
+    max-width: 100%;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 650px) {
     .profile__info {
         margin: 0;
         display: flex;
