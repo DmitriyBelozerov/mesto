@@ -10,8 +10,8 @@
     cursor: pointer;
     background-size: cover;
     position: absolute;
-    top: -35px;
-    right: -35px;
+    top: -40px;
+    right: -40px;
     opacity: 1;
     transition: opacity 0.5s linear 0s;
 }

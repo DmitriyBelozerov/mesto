@@ -26,3 +26,12 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/form/__sending/form__sending.css);
 @import url(../blocks/galary/galary.css);
+@import url(../blocks/popup/_edit_profile/popup_edit_profile.css);
+@import url(../blocks/popup/_add_photo/popup_add_photo.css);
+@import url(../blocks/form/_edit_profile/form_edit_profile.css);
+@import url(../blocks/form/_add_photo/form_add_photo.css);
+@import url(../blocks/form/__close/_profile/form__close_profile.css);
+@import url(../blocks/form/__submit/_foto/form__submit_foto.css);
+@import url(../blocks/form/__submit/_profile/form__submit_profile.css);
+@import url(../blocks/card/__like/_active/card__like_active.css);
+@import url(../blocks/card/__delete/card__delete.css);
