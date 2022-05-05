@@ -29,37 +29,6 @@
 
     <section class="galary">
         <ul class="cards">
-            <!--<li class="card">
-                <img src="images/karachaevsk.jpg" alt="Карачаевск" class="card__photo">
-                <h2 class="card__title">Карачаевск </h2>
-                <button class="card__like" type="button" aria-label="like"></button>
-            </li>
-            <li class="card">
-                <img src="images/elbrus.jpg" alt="Гора Эльбрус" class="card__photo">
-                <h2 class="card__title">Гора Эльбрус</h2>
-                <button class="card__like" type="button" aria-label="like"></button>
-            </li>
-            <li class="card">
-                <img src="images/dombai.jpg" alt="Домбай" class="card__photo">
-                <h2 class="card__title">Домбай</h2>
-                <button class="card__like" type="button" aria-label="like"></button>
-            </li>
-            <li class="card">
-                <img src="images/elbrus.jpg" alt="Гора Эльбрус" class="card__photo">
-                <h2 class="card__title">Гора Эльбрус</h2>
-                <button class="card__like" type="button" aria-label="like"></button>
-            </li>
-            <li class="card">
-                <img src="images/dombai.jpg" alt="Домбай" class="card__photo">
-                <h2 class="card__title">Домбай</h2>
-                <button class="card__like" type="button" aria-label="like"></button>
-            </li>
-            <li class="card">
-                <img src="images/karachaevsk.jpg" alt="Карачаево-Черкессия" class="card__photo">
-                <h2 class="card__title">Карачаево-Черкессия</h2>
-                <button class="card__like" type="button" aria-label="like"></button>
-            </li>-->
-
 
 
         </ul>
@@ -85,7 +54,7 @@
         <div class="form form_add_photo">
             <button class="form__close form__close_add-photo" type="button" aria-label="close"></button>
             <h3 class="form__title">Новое место</h3>
-            <form class="form__sending " action="#">
+            <form class="form__sending form__sending_foto_add" action="#">
                 <input class="form__input form__input_add_photo" type="text" name="input-photo-name" value="Название">
                 <input class="form__input form__input_add_url" type="url" name="input-photo-url"
                     value="https://i08.fotocdn.net/s116/a12aeff86aeacdff/gallery_xl/2648186076.jpg">
@@ -96,7 +65,7 @@
 
     <template id="card">
         <li class="card">
-            <img alt="фото" class="card__photo">
+            <img alt="фото" class="card__photo" url="">
             <h2 class="card__title"></h2>
             <button class="card__like" type="button" aria-label="like"></button>
             <button class="card__delete" type="button" aria-label="delete"></button>
