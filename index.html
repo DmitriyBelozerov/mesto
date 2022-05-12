@@ -2,21 +2,20 @@
 <html lang="ru">
 
 <head>
-    <link rel="stylesheet" href="pages/index.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages/index.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место</title>
 </head>
 
 <body class="page">
-
     <header class="header">
-        <img src="images/logo.svg" alt="логотип Место" class="header__logo">
+        <img src="images/logo.svg" alt="логотип Место" class="header__logo" />
     </header>
 
     <section class="profile">
-        <img src="images/Avatar.png" alt="аватар пользователя" class="profile__avatar">
+        <img src="images/Avatar.png" alt="аватар пользователя" class="profile__avatar" />
 
         <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -28,10 +27,7 @@
     </section>
 
     <section class="galary">
-        <ul class="cards">
-
-
-        </ul>
+        <ul class="cards"></ul>
     </section>
 
     <footer class="footer">
@@ -43,9 +39,11 @@
             <button class="form__close form__close_profile" type="button" aria-label="close"></button>
             <h3 class="form__title">Редактировать профиль</h3>
             <form class="form__sending" action="#">
-                <input class="form__input form__input_type_name" type="text" name="input-name" value="">
-                <input class="form__input form__input_type_about" type="text" name="input-about" value="">
-                <button class="form__submit form__submit_profile" type="submit">Сохранить</button>
+                <input class="form__input form__input_type_name" type="text" name="input-name" value="" />
+                <input class="form__input form__input_type_about" type="text" name="input-about" value="" />
+                <button class="form__submit form__submit_profile" type="submit">
+                    Сохранить
+                </button>
             </form>
         </div>
     </div>
@@ -55,17 +53,19 @@
             <button class="form__close form__close_add-photo" type="button" aria-label="close"></button>
             <h3 class="form__title">Новое место</h3>
             <form class="form__sending form__sending_foto_add" action="#">
-                <input class="form__input form__input_add_photo" type="text" name="input-photo-name" value="Название">
+                <input class="form__input form__input_add_photo" type="text" name="input-photo-name" value="Название" >
                 <input class="form__input form__input_add_url" type="url" name="input-photo-url"
-                    value="https://i08.fotocdn.net/s116/a12aeff86aeacdff/gallery_xl/2648186076.jpg">
-                <button class="form__submit form__submit_foto" type="submit">Создать</button>
+                    value="https://i08.fotocdn.net/s116/a12aeff86aeacdff/gallery_xl/2648186076.jpg" >
+                <button class="form__submit form__submit_foto" type="submit">
+                    Создать
+                </button>
             </form>
         </div>
     </div>
 
     <template id="card">
         <li class="card">
-            <img alt="фото" class="card__photo" url="">
+            <img alt="фото" class="card__photo" src="" >
             <h2 class="card__title"></h2>
             <button class="card__like" type="button" aria-label="like"></button>
             <button class="card__delete" type="button" aria-label="delete"></button>

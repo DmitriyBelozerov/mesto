@@ -93,16 +93,17 @@ const submitAddFotoCard = (event) => {
 };
 
 ///////////////// добавление фото из массива
-const cardTemplate = document
-  .querySelector("#card")
-  .content.querySelector(".card");
+const cardTemplate = document.querySelector("#card").content.querySelector(".card");
 
 /// генерация карточки
 const generateCardList = (cardData) => {
   const newTemplatePhotoCard = cardTemplate.cloneNode(true);
 
   const titleNewCard = newTemplatePhotoCard.querySelector(".card__title");
-  titleNewCard.textContent = cardData.value;
+  titleNewCard.textContent = cardData.name;
+  const urlNewCard = newTemplatePhotoCard.querySelector(".card__photo");
+  urlNewCard.src = cardData.link;
+
   const deleteButton = newTemplatePhotoCard.querySelector(".card__delete");
   deleteButton.addEventListener("click", handleDeleteCard);
 
