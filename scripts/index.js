@@ -72,9 +72,7 @@ profileAddButton.addEventListener("click", function formAddOpen() {
   addForm.classList.add("popup_opened");
 });
 
-addformClose.addEventListener("click", function formAddPhotoClose() {
-  addForm.classList.remove("popup_opened");
-});
+addformClose.addEventListener("click", formAddPhotoClose);
 
 const handleDeleteCard = (event) => {
   event.target.closest ('.card').remove();
@@ -90,6 +88,7 @@ const submitAddFotoCard = (event) => {
     name: formInputAddNamePhoto.value,
     link: formInputAddUrl.value,
   });
+  formAddPhotoClose();
 };
 
 ///////////////// добавление фото из массива
@@ -122,3 +121,8 @@ initialCards.forEach((cardData) => {
   renderCard(cardData);
 });
 
+function formAddPhotoClose() {
+  addForm.classList.remove("popup_opened")
+};
+
+formSubmitAddPhoto.addEventListener ('submit', submitAddFotoCard);
