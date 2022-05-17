@@ -36,3 +36,13 @@
 @import url(../blocks/card/__like/_active/card__like_active.css);
 @import url(../blocks/card/__delete/card__delete.css);
 @import url(../blocks/form/__sending/_foto_add/form__sending_foto_add.css);
+@import url(../blocks/popup/_view_photo/popup_view_photo.css);
+@import url(../blocks/container-view-photo/container-view-photo.css);
+@import url(../blocks/container-view-photo/__button-close/container-view-photo__button-close.css);
+@import url(../blocks/container-view-photo/__photo/container-view-photo__photo.css);
+@import url(../blocks/container-view-photo/__title/container-view-photo__title.css);
+@import url(../blocks/card/_popup/card_popup.css);
+@import url(../blocks/card/__photo/_popup/card__photo_popup.css);
+@import url(../blocks/card/__title/_popup/card__title_popup.css);
+@import url(../blocks/card/__like/_popup/card__like_popup.css);
+@import url(../blocks/card/__delete/_popup/card__delete_popup.css);

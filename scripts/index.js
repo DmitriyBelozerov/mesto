@@ -75,12 +75,14 @@ profileAddButton.addEventListener("click", function formAddOpen() {
 addformClose.addEventListener("click", formAddPhotoClose);
 
 const handleDeleteCard = (event) => {
-  event.target.closest ('.card').remove();
+  event.target.closest(".card").remove();
 };
 
 const handleLikeCard = (event) => {
-  event.target.closest ('.card__like').classList.toggle("card__like_active");
+  event.target.closest(".card__like").classList.toggle("card__like_active");
 };
+
+
 
 const submitAddFotoCard = (event) => {
   event.preventDefault();
@@ -94,14 +96,32 @@ const submitAddFotoCard = (event) => {
 ///////////////// добавление фото из массива
 const cardTemplate = document.querySelector("#card").content.querySelector(".card");
 
+
+const popupViewPhoto = document.querySelector('.popup_view_photo');
+
+const containerViewPhotoPhoto = document.querySelector(".container-view-photo__photo");
+const containerViewPhotoTitle = document.querySelector(".container-view-photo__title");
 /// генерация карточки
 const generateCardList = (cardData) => {
   const newTemplatePhotoCard = cardTemplate.cloneNode(true);
-
   const titleNewCard = newTemplatePhotoCard.querySelector(".card__title");
   titleNewCard.textContent = cardData.name;
-  const urlNewCard = newTemplatePhotoCard.querySelector(".card__photo");
-  urlNewCard.src = cardData.link;
+  const cardPhoto = newTemplatePhotoCard.querySelector(".card__photo");
+  cardPhoto.src = cardData.link;
+
+
+  cardPhoto.addEventListener("click", function (event) {
+    let eventPhoto = event.target;
+    containerViewPhotoPhoto.src = cardPhoto.src;
+    containerViewPhotoTitle.textContent = cardPhoto.nextElementSibling.textContent;
+    popupViewPhoto.classList.add ('popup_opened');
+  });
+
+  const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
+
+  containerViewPhotoButtonClose.addEventListener("click", function handleCloseViewCard (event) {
+    popupViewPhoto.classList.remove("popup_opened");
+  });
 
   const deleteButton = newTemplatePhotoCard.querySelector(".card__delete");
   deleteButton.addEventListener("click", handleDeleteCard);
@@ -122,7 +142,7 @@ initialCards.forEach((cardData) => {
 });
 
 function formAddPhotoClose() {
-  addForm.classList.remove("popup_opened")
-};
+  addForm.classList.remove("popup_opened");
+}
 
-formSubmitAddPhoto.addEventListener ('submit', submitAddFotoCard);
+formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
