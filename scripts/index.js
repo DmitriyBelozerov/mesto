@@ -30,9 +30,7 @@ function formSubmitHandler(e) {
 }
 
 formSubmit.addEventListener("submit", formSubmitHandler);
-//////////// 1 часть
 
-//                        массив
 let initialCards = [
   {
     name: "Архыз",
@@ -67,7 +65,6 @@ const addformClose = document.querySelector(".form__close_add-photo");
 const addForm = document.querySelector(".popup_add_photo");
 const cardListContainer = document.querySelector(".cards");
 
-//////обработчики событий
 profileAddButton.addEventListener("click", function formAddOpen() {
   addForm.classList.add("popup_opened");
 });
@@ -82,33 +79,28 @@ const handleLikeCard = (event) => {
   event.target.closest(".card__like").classList.toggle("card__like_active");
 };
 
-
-
 const submitAddFotoCard = (event) => {
   event.preventDefault();
   renderCard({
     name: formInputAddNamePhoto.value,
     link: formInputAddUrl.value,
   });
+  formInputAddNamePhoto.value = '';
+  formInputAddUrl.value = '';
   formAddPhotoClose();
 };
 
-///////////////// добавление фото из массива
 const cardTemplate = document.querySelector("#card").content.querySelector(".card");
-
-
 const popupViewPhoto = document.querySelector('.popup_view_photo');
-
 const containerViewPhotoPhoto = document.querySelector(".container-view-photo__photo");
 const containerViewPhotoTitle = document.querySelector(".container-view-photo__title");
-/// генерация карточки
+
 const generateCardList = (cardData) => {
   const newTemplatePhotoCard = cardTemplate.cloneNode(true);
   const titleNewCard = newTemplatePhotoCard.querySelector(".card__title");
   titleNewCard.textContent = cardData.name;
   const cardPhoto = newTemplatePhotoCard.querySelector(".card__photo");
   cardPhoto.src = cardData.link;
-
 
   cardPhoto.addEventListener("click", function (event) {
     let eventPhoto = event.target;
@@ -132,7 +124,6 @@ const generateCardList = (cardData) => {
   return newTemplatePhotoCard;
 };
 
-//
 const renderCard = (cardData) => {
   cardListContainer.prepend(generateCardList(cardData));
 };
