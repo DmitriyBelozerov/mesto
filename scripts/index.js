@@ -22,18 +22,22 @@ function editOpenForm() {
   editForm.classList.add("popup_opened");
   formNameElement.value = nameProfile.textContent;
   formJobNameElement.value = aboutProfile.textContent;
-}
+};
 
-function editCloseForm() {
-  editForm.classList.remove("popup_opened");
-}
+function closePopup(event) {
+  event.target.closest(".popup").classList.remove("popup_opened");
+};
 
-function formSubmitHandler(e) {
-  e.preventDefault();
+function openPopup(event) {
+  event.target.closest(".popup").classList.add("popup_opened");
+};
+
+function submitHandlerForm(event) {
+  event.preventDefault();
   nameProfile.textContent = formNameElement.value;
   aboutProfile.textContent = formJobNameElement.value;
-  editCloseForm();
-}
+  closePopup(event);
+};
 
 const handleLikeCard = (event) => {
   event.target.closest(".card__like").classList.toggle("card__like_active");
@@ -46,15 +50,19 @@ const submitAddFotoCard = (event) => {
     link: formInputAddUrl.value,
   });
   event.target.reset();
-  closeForm();
+  closePopup(event);
 };
 
 const generateCardList = (cardData) => {
+  const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
   const newTemplatePhotoCard = cardTemplate.cloneNode(true);
   const titleNewCard = newTemplatePhotoCard.querySelector(".card__title");
-  titleNewCard.textContent = cardData.name;
+  const likeButton = newTemplatePhotoCard.querySelector(".card__like");
+  const deleteButton = newTemplatePhotoCard.querySelector(".card__delete");
   const cardPhoto = newTemplatePhotoCard.querySelector(".card__photo");
+
   cardPhoto.src = cardData.link;
+  titleNewCard.textContent = cardData.name;
 
   cardPhoto.addEventListener("click", function (event) {
     const eventPhoto = event.target;
@@ -62,33 +70,30 @@ const generateCardList = (cardData) => {
     containerViewPhotoPhoto.alt = containerViewPhotoTitle.textContent = cardPhoto.nextElementSibling.textContent;
     popupViewPhoto.classList.add('popup_opened');
   });
-
-  const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
-  
-  containerViewPhotoButtonClose.addEventListener("click", handlePreviewPicture);
-
-  const deleteButton = newTemplatePhotoCard.querySelector(".card__delete");
+  containerViewPhotoButtonClose.addEventListener("click", closePopup);
   deleteButton.addEventListener("click", handleDeleteCard);
-  const likeButton = newTemplatePhotoCard.querySelector(".card__like");
   likeButton.addEventListener("click", handleLikeCard);
+
   return newTemplatePhotoCard;
 };
 
-const handleDeleteCard = (event) => { event.target.closest(".card").remove(); };
+const handleDeleteCard = (event) => {
+  event.target.closest(".card").remove();
+};
 
-const handlePreviewPicture = (event) => { event.target.closest(".popup_opened").remove(); };
+const renderCard = (cardData) => {
+  cardListContainer.append(generateCardList(cardData));
+};
 
-const renderCard = (cardData) => { cardListContainer.append(generateCardList(cardData)); };
-
-initialCards.forEach((cardData) => { renderCard(cardData); });
-
-function closeForm() { addForm.classList.remove("popup_opened"); }
+initialCards.forEach((cardData) => {
+  renderCard(cardData);
+});
 
 formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
 profileEditButton.addEventListener("click", editOpenForm);
-formClose.addEventListener("click", editCloseForm);
-formSubmit.addEventListener("submit", formSubmitHandler);
-addformClose.addEventListener("click", closeForm);
+formClose.addEventListener("click", closePopup);
+formSubmit.addEventListener("submit", submitHandlerForm);
+addformClose.addEventListener("click", closePopup);
 
 profileAddButton.addEventListener("click", function formAddOpen() {
   addForm.classList.add("popup_opened");
