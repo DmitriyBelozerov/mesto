@@ -27,15 +27,19 @@ function editOpenForm() {
 };
 
 
-function closePopup(event) {
+function closePopupButton(event) {
   event.target.closest(".popup").classList.remove("popup_opened");
+};
+
+function closePopup(elem) {
+  elem.classList.remove("popup_opened");
 };
 
 function openPopup(elem) {
   elem.classList.add("popup_opened");
 };
 
-function openFormAddPhoto () {
+function openFormAddPhoto() {
   openPopup(popupAddPhoto);
 };
 
@@ -43,7 +47,7 @@ function submitHandlerForm(event) {
   event.preventDefault();
   nameProfile.textContent = formNameElement.value;
   aboutProfile.textContent = formJobNameElement.value;
-  closePopup(event);
+  closePopup(formEdit);
 };
 
 const handleLikeCard = (event) => {
@@ -57,7 +61,7 @@ const submitAddFotoCard = (event) => {
     link: formInputAddUrl.value,
   });
   event.target.reset();
-  closePopup(event);
+  closePopup(popupAddPhoto);
 };
 
 const generateCardList = (cardData) => {
@@ -96,9 +100,9 @@ initialCards.forEach((cardData) => {
 
 formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
 profileEditButton.addEventListener("click", editOpenForm);
-formClose.addEventListener("click", closePopup);
 formSubmit.addEventListener("submit", submitHandlerForm);
-formCloseAddPhoto.addEventListener("click", closePopup);
-containerViewPhotoButtonClose.addEventListener("click", closePopup);
 profileAddButton.addEventListener("click", openFormAddPhoto);
+formClose.addEventListener("click", closePopupButton);
+containerViewPhotoButtonClose.addEventListener("click", closePopupButton);
+formCloseAddPhoto.addEventListener("click", closePopupButton);
 
