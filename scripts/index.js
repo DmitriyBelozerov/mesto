@@ -26,13 +26,16 @@ function editOpenForm() {
   formJobNameElement.value = aboutProfile.textContent;
 };
 
-
-function closePopupButton(event) {
-  event.target.closest(".popup").classList.remove("popup_opened");
+function closePopupFormEdit() {
+  formEdit.classList.remove("popup_opened");
 };
 
-function closePopup(elem) {
-  elem.classList.remove("popup_opened");
+function closePopupViewPhoto() {
+  popupViewPhoto.classList.remove("popup_opened");
+};
+
+function closePopupAddPhoto() {
+  popupAddPhoto.classList.remove("popup_opened");
 };
 
 function openPopup(elem) {
@@ -51,7 +54,7 @@ function submitHandlerForm(event) {
 };
 
 const handleLikeCard = (event) => {
-  event.target.closest(".card__like").classList.toggle("card__like_active");
+  event.target.classList.toggle("card__like_active");
 };
 
 const submitAddFotoCard = (event) => {
@@ -70,16 +73,19 @@ const generateCardList = (cardData) => {
   const likeButton = newTemplatePhotoCard.querySelector(".card__like");
   const cardDelete = newTemplatePhotoCard.querySelector(".card__delete");
   const cardPhoto = newTemplatePhotoCard.querySelector(".card__photo");
+  const cardTitle = newTemplatePhotoCard.querySelector(".card__title");
 
   cardPhoto.src = cardData.link;
   titleNewCard.textContent = cardData.name;
 
-  cardPhoto.addEventListener("click", function (event) {
+  function handlePreviewCard() {
     containerViewPhotoPhoto.src = cardPhoto.src;
-    containerViewPhotoPhoto.alt = cardPhoto.nextElementSibling.textContent;
-    containerViewPhotoTitle.textContent = cardPhoto.nextElementSibling.textContent;
+    containerViewPhotoPhoto.alt = cardTitle.textContent;
+    containerViewPhotoTitle.textContent = cardTitle.textContent;
     openPopup(popupViewPhoto);
-  });
+  };
+
+  cardPhoto.addEventListener("click", handlePreviewCard);
   cardDelete.addEventListener("click", handleDeleteCard);
   likeButton.addEventListener("click", handleLikeCard);
 
@@ -91,7 +97,7 @@ const handleDeleteCard = (event) => {
 };
 
 const renderCard = (cardData) => {
-  cardListContainer.append(generateCardList(cardData));
+  cardListContainer.prepend(generateCardList(cardData));
 };
 
 initialCards.forEach((cardData) => {
@@ -102,7 +108,7 @@ formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
 profileEditButton.addEventListener("click", editOpenForm);
 formSubmit.addEventListener("submit", submitHandlerForm);
 profileAddButton.addEventListener("click", openFormAddPhoto);
-formClose.addEventListener("click", closePopupButton);
-containerViewPhotoButtonClose.addEventListener("click", closePopupButton);
-formCloseAddPhoto.addEventListener("click", closePopupButton);
+containerViewPhotoButtonClose.addEventListener("click", closePopupViewPhoto);
+formCloseAddPhoto.addEventListener("click", closePopupAddPhoto);
+formClose.addEventListener("click", closePopupFormEdit);
 
