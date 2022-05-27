@@ -26,22 +26,22 @@ function editOpenForm() {
   formJobNameElement.value = aboutProfile.textContent;
 };
 
+function closePopup (popup) {
+popup.classList.remove("popup_opened");
+};
 function closePopupFormEdit() {
-  formEdit.classList.remove("popup_opened");
+  closePopup (formEdit);
 };
-
 function closePopupViewPhoto() {
-  popupViewPhoto.classList.remove("popup_opened");
+  closePopup (popupViewPhoto);
 };
-
 function closePopupAddPhoto() {
-  popupAddPhoto.classList.remove("popup_opened");
+  closePopup (popupAddPhoto);
 };
 
 function openPopup(elem) {
   elem.classList.add("popup_opened");
 };
-
 function openFormAddPhoto() {
   openPopup(popupAddPhoto);
 };
@@ -50,7 +50,7 @@ function submitHandlerForm(event) {
   event.preventDefault();
   nameProfile.textContent = formNameElement.value;
   aboutProfile.textContent = formJobNameElement.value;
-  closePopup(formEdit);
+  closePopupFormEdit();
 };
 
 const handleLikeCard = (event) => {
