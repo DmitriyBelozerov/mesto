@@ -19,24 +19,23 @@ const popupAddPhoto = document.querySelector(".popup_add_photo");
 const cardListContainer = document.querySelector(".cards");
 const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
 
-
 function editOpenForm() {
   openPopup(formEdit);
   formNameElement.value = nameProfile.textContent;
   formJobNameElement.value = aboutProfile.textContent;
 };
 
-function closePopup (popup) {
-popup.classList.remove("popup_opened");
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
 };
 function closePopupFormEdit() {
-  closePopup (formEdit);
+  closePopup(formEdit);
 };
 function closePopupViewPhoto() {
-  closePopup (popupViewPhoto);
+  closePopup(popupViewPhoto);
 };
 function closePopupAddPhoto() {
-  closePopup (popupAddPhoto);
+  closePopup(popupAddPhoto);
 };
 
 function openPopup(elem) {
