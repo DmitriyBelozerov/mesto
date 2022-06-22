@@ -39,9 +39,11 @@
             <button class="form__close form__close_profile" type="button" aria-label="close"></button>
             <h3 class="form__title">Редактировать профиль</h3>
             <form class="form__sending" action="#" placeholder="">
-                <input class="form__input form__input_type_name" type="text" name="input-name" value="" placeholder="" minlength="2" maxlength="40">
-                <input class="form__input form__input_type_about" type="text" name="input-about" value=""
+                <input id="name" class="form__input form__input_type_name" type="text" name="input-name" value="" placeholder="" minlength="2" maxlength="40">
+                <span id="error-name" class="error-message error-message__hiden"></span>
+                <input id="profession" class="form__input form__input_type_about" type="text" name="input-about" value=""
                     placeholder="">
+                <span id="error-profession" class="error-message error-message__hiden"></span>
                 <button class="form__submit form__submit_profile" type="submit">
                     Сохранить
                 </button>
@@ -55,7 +57,7 @@
             <h3 class="form__title">Новое место</h3>
             <form class="form__sending form__sending_foto_add" action="#">
                 <input class="form__input form__input_add_photo" type="text" name="input-photo-name" value=""
-                    placeholder="Название">
+                    placeholder="Название" minlength="2" maxlength="30">
                 <input class="form__input form__input_add_url" type="url" name="input-photo-url" value=""
                     placeholder="Ссылка">
                 <button class="form__submit form__submit_foto" type="submit">
