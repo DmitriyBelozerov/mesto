@@ -122,7 +122,7 @@ formClose.addEventListener("click", closePopupFormEdit);
 
 document.addEventListener('keydown', checkEsc);
 
-document.addEventListener("click", function (event) {
+document.addEventListener("mousedown", function (event) {
   const popup = event.target.classList.contains('popup');
   const popupView = document.querySelector('.popup_opened');
   if (popup) {
