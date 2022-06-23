@@ -18,13 +18,13 @@ const toggleButton = (formInput, buttonElement) => {
 
 const showInputError = (inputItem, errorElement) => {
     inputItem.classList.add('form__input_type_error');
-    errorElement.classList.remove('error-message__hiden');
+    errorElement.classList.remove('form__error-message_hiden');
     errorElement.textContent = inputItem.validationMessage;
 };
 
 const hideInputError = (inputItem, errorElement) => {
     inputItem.classList.remove('form__input_type_error');
-    errorElement.classList.add('error-message__hiden');
+    errorElement.classList.add('form__error-message_hiden');
     errorElement.textContent = inputItem.validationMessage;
 };
 

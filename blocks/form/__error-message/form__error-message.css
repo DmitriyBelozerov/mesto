@@ -1,4 +1,4 @@
-.error-message {
+.form__error-message {
     display: flex;
     position: absolute;
     font-size: 12px;
