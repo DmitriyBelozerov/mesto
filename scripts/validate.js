@@ -36,11 +36,6 @@ const hideInputError = (inputItem, errorElement) => {
     errorElement.textContent = '';
 };
 
-
-
-
-
-
 function enableValidation (config)  {
     forms.forEach((formItem) => {
     const buttonElement = formItem.querySelector(config.formSubmit);
