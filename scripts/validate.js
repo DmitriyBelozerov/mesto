@@ -1,13 +1,21 @@
 const forms = Array.from(document.querySelectorAll('.form'));
+const config = {    
+    formSubmit: '.form__submit',
+    formInput: '.form__input'      
+  };
 
-const hasInvalidInput = (formInput) => {
+const hasInvalidInput = (inputItem) => {
+    return !inputItem.validity.valid;
+};
+
+const hasInvalidForm = (formInput) => {
     return formInput.some((inputItem) => {
         return !inputItem.validity.valid;
     });
 };
 
 const toggleButton = (formInput, buttonElement) => {
-    if (hasInvalidInput(formInput)) {
+    if (hasInvalidForm(formInput)) {
         buttonElement.classList.add('form__submit_type_disabled');
         buttonElement.setAttribute('disabled', true);
     } else {
@@ -25,24 +33,39 @@ const showInputError = (inputItem, errorElement) => {
 const hideInputError = (inputItem, errorElement) => {
     inputItem.classList.remove('form__input_type_error');
     errorElement.classList.add('form__error-message_hiden');
-    errorElement.textContent = inputItem.validationMessage;
+    errorElement.textContent = '';
 };
 
-forms.forEach((formItem) => {
-    const buttonElement = formItem.querySelector('.form__submit');
-    const formInput = Array.from(formItem.querySelectorAll('.form__input'));
-    formInput.forEach((inputItem) => {
+
+
+
+
+
+function enableValidation (config)  {
+    forms.forEach((formItem) => {
+    const buttonElement = formItem.querySelector(config.formSubmit);
+    const formInputs = Array.from(formItem.querySelectorAll(config.formInput));
+    formInputs.forEach((inputItem) => {
         const errorElement = inputItem.nextElementSibling;
         inputItem.addEventListener('input', function (evt) {
-            if (hasInvalidInput(formInput)) {
+            if (hasInvalidInput(inputItem)) {
                 showInputError(inputItem, errorElement);
-                toggleButton(formInput, buttonElement);
+                toggleButton(formInputs, buttonElement);
             } else {
                 hideInputError(inputItem, errorElement);
-                toggleButton(formInput, buttonElement);
+                toggleButton(formInputs, buttonElement);
             }
         });
     }
     );
 }
-);
+);}
+
+enableValidation(config); 
+
+
+
+
+
+
+

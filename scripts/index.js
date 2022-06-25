@@ -1,5 +1,5 @@
 const profileEditButton = document.querySelector(".profile__edit");
-const formClose = document.querySelector(".form__close_profile");
+const formCloseProfile = document.querySelector(".form__close_profile");
 const formEdit = document.querySelector(".popup_edit_profile");
 const cardTemplate = document.querySelector("#card").content.querySelector(".card");
 const popupViewPhoto = document.querySelector('.popup_view_photo');
@@ -7,7 +7,7 @@ const containerViewPhotoPhoto = document.querySelector(".container-view-photo__p
 const containerViewPhotoTitle = document.querySelector(".container-view-photo__title");
 const formNameElement = document.querySelector(".form__input_type_name");
 const formJobNameElement = document.querySelector(".form__input_type_about");
-const formSubmit = document.querySelector(".form_edit_profile");
+const formSubmitProfile = document.querySelector(".form_edit_profile");
 const nameProfile = document.querySelector(".profile__name");
 const aboutProfile = document.querySelector(".profile__about-name");
 const formInputAddNamePhoto = document.querySelector(".form__input_add_photo");
@@ -18,6 +18,8 @@ const formCloseAddPhoto = document.querySelector(".form__close_add-photo");
 const popupAddPhoto = document.querySelector(".popup_add_photo");
 const cardListContainer = document.querySelector(".cards");
 const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
+const formSubmitFoto = formSubmitAddPhoto.querySelector('.form__submit');
+const keyNmbrEsc = 27;
 
 function editOpenForm() {
   openPopup(formEdit);
@@ -27,31 +29,19 @@ function editOpenForm() {
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', handleEscClose);
 };
 
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener('keydown',  handleEscClose);
+  };
 
-function closePopupFormEdit() {
-  closePopup(formEdit);
-};
-function closePopupViewPhoto() {
-  closePopup(popupViewPhoto);
-};
-function closePopupAddPhoto() {
-  closePopup(popupAddPhoto);
-};
-
-function openPopup(elem) {
-  elem.classList.add("popup_opened");
-};
-function openFormAddPhoto() {
-  openPopup(popupAddPhoto);
-};
-
-function submitHandlerForm(event) {
+function submitProfileForm(event) {
   event.preventDefault();
   nameProfile.textContent = formNameElement.value;
   aboutProfile.textContent = formJobNameElement.value;
-  closePopupFormEdit();
+  closePopup(formEdit);
 };
 
 const handleLikeCard = (event) => {
@@ -66,6 +56,8 @@ const submitAddFotoCard = (event) => {
   });
   event.target.reset();
   closePopup(popupAddPhoto);
+  formSubmitFoto.setAttribute('disabled', true);
+  formSubmitFoto.classList.add('form__submit_type_disabled');
 };
 
 const generateCardList = (cardData) => {
@@ -105,29 +97,26 @@ initialCards.forEach((cardData) => {
   renderCard(cardData);
 });
 
- function checkEsc (evt) {
+function  handleEscClose(evt) {
   const popupView = document.querySelector('.popup_opened');
-    if (evt.keyCode === 27) {
-      popupView.classList.remove('popup_opened');
-    };
+  if (evt.keyCode === keyNmbrEsc) {
+    closePopup(popupView);
+  };
 }
 
 formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
 profileEditButton.addEventListener("click", editOpenForm);
-formSubmit.addEventListener("submit", submitHandlerForm);
-profileAddButton.addEventListener("click", openFormAddPhoto);
-containerViewPhotoButtonClose.addEventListener("click", closePopupViewPhoto);
-formCloseAddPhoto.addEventListener("click", closePopupAddPhoto);
-formClose.addEventListener("click", closePopupFormEdit);
+formSubmitProfile.addEventListener("submit", submitProfileForm);
+profileAddButton.addEventListener("click",() => openPopup(popupAddPhoto));
+containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
+formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
+formCloseProfile.addEventListener("click", () => closePopup (formEdit));
 
-document.addEventListener('keydown', checkEsc);
-
-document.addEventListener("mousedown", function (event) {
+document.addEventListener("mousedown", (event) => {
   const popup = event.target.classList.contains('popup');
   const popupView = document.querySelector('.popup_opened');
   if (popup) {
-    popupView.classList.remove('popup_opened');
+    closePopup(popupView);
   }
 });
 
- 
