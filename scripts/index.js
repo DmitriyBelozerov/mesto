@@ -69,6 +69,7 @@ const generateCardList = (cardData) => {
   const cardTitle = newTemplatePhotoCard.querySelector(".card__title");
 
   cardPhoto.src = cardData.link;
+  cardPhoto.alt = cardData.name;
   titleNewCard.textContent = cardData.name;
 
   function handlePreviewCard() {
