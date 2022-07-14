@@ -1,4 +1,6 @@
-import { Cards } from "./Card.js";
+import { TaskListItem } from "./TaskListItem.js";
+import { TaskList } from "./TaskList.js";
+import { FormValidator } from "./FormValidator.js";
 
 const initialCards = [
   {
@@ -9,23 +11,31 @@ const initialCards = [
     name: "Челябинская область",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
   },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+  ];
+
+const config = {
+  tasksList: '.cards',
+  taskListItemText: '.card__title',
+  taskListItemUrl: '.card__photo',
+  taskListItemDelete: '.card__delete',
+  taskListItemLikeButtom: '.card__like',
+  templateItem: '#card',
+  
+
+}
+
+const todo = document.querySelector(config.tasksList);
+
+initialCards.forEach(item => {
+  const task = new TaskListItem(config, item.name, item.link);
+  task.render(todo);
+})
+
+const taskList = new TaskList(config);
+
+
+
+
 
 const profileEditButton = document.querySelector(".profile__edit");
 const formCloseProfile = document.querySelector(".form__close_profile");
@@ -49,63 +59,6 @@ const cardListContainer = document.querySelector(".cards");
 const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
 const formSubmitFoto = formSubmitAddPhoto.querySelector('.form__submit');
 const keyNmbrEsc = 27;
-
-
-
-
-const config = {
-  tasksList: '.cards',
-  taskListItemText: '.card__title',
-  taskListItemUrl: '.card__photo',
-  taskListItemDelete: '.card__delete',
-  taskListItemLikeButtom: '.card__like',
-  templateItem: '#card',
-
-
-}
-
-const log = document.querySelector(config.templateItem);
-
-
-const listContainer = document.querySelector(config.tasksList);
-
-initialCards.forEach(item => {
-  const task = new Cards(config, item.name, item.link);
-  task.render(listContainer);
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function editOpenForm() {
   openPopup(formEdit);
@@ -131,23 +84,54 @@ function submitProfileForm(event) {
 };
 
 
+
 const submitAddFotoCard = (event) => {
   event.preventDefault();
-  renderCard({
-    name: formInputAddNamePhoto.value,
-    link: formInputAddUrl.value,
-  });
+  
+  taskList.render(todo);
   event.target.reset();
   closePopup(popupAddPhoto);
   formSubmitFoto.setAttribute('disabled', true);
   formSubmitFoto.classList.add('form__submit_type_disabled');
 };
 
+// const generateCardList = (cardData) => {
+//   const newTemplatePhotoCard = cardTemplate.cloneNode(true);
+//   const titleNewCard = newTemplatePhotoCard.querySelector(".card__title");
+//   const likeButton = newTemplatePhotoCard.querySelector(".card__like");
+//   const cardDelete = newTemplatePhotoCard.querySelector(".card__delete");
+//   const cardPhoto = newTemplatePhotoCard.querySelector(".card__photo");
+//   const cardTitle = newTemplatePhotoCard.querySelector(".card__title");
 
+//   cardPhoto.src = cardData.link;
+//   cardPhoto.alt = cardData.name;
+//   titleNewCard.textContent = cardData.name;
 
+//   function handlePreviewCard() {
+//     containerViewPhotoPhoto.src = cardPhoto.src;
+//     containerViewPhotoPhoto.alt = cardTitle.textContent;
+//     containerViewPhotoTitle.textContent = cardTitle.textContent;
+//     openPopup(popupViewPhoto);
+//   };
 
+//   cardPhoto.addEventListener("click", handlePreviewCard);
+//   cardDelete.addEventListener("click", handleDeleteCard);
+//   likeButton.addEventListener("click", handleLikeCard);
 
+//   return newTemplatePhotoCard;
+// };
 
+const handleDeleteCard = (event) => {
+  event.target.closest(".card").remove();
+};
+
+// const renderCard = (cardData) => {
+//   cardListContainer.prepend(_view);
+// };
+
+// initialCards.forEach((cardData) => {
+//   renderCard(cardData);
+// });
 
 function  handleEscClose(evt) {
   const popupView = document.querySelector('.popup_opened');

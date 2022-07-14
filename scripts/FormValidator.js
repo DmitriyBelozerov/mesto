@@ -1,5 +1,10 @@
+export class FormValidator {
+    constructor(config) {
+        this._config = config;
+    }
 
-
+};
+ 
 
 
 
@@ -16,6 +21,7 @@
 //     formInputTypeError: 'form__input_type_error',
 //     formErrorMessageHiden: 'form__error-message_hiden'
 // };
+
 // const forms = Array.from(document.querySelectorAll(validationConfig.form));
 
 

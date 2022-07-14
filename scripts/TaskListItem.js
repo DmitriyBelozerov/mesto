@@ -1,6 +1,6 @@
 
 
-export class Cards {
+export class TaskListItem {
     constructor(config, name, link) {
         this._config = config;
         this._name = name;
@@ -41,7 +41,7 @@ export class Cards {
 
         this._addEventListeners();
 
-        tasksList.append(this._view);
+        tasksList.prepend(this._view);
     }
 };
 
