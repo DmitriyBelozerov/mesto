@@ -86,8 +86,8 @@ forms.forEach(formItem => {
     const buttonElement = formItem.querySelector(config.formSubmit);
     const formInputs = Array.from(formItem.querySelectorAll(config.formInput));
     formInputs.forEach(element => {
-        const validator = new FormValidator(config, element);
-        validator.enableValidation(config, element);
+        const validator = new FormValidator(config, element, formItem);
+        validator.enableValidation(config, element, formItem);
     });
 }
 );
