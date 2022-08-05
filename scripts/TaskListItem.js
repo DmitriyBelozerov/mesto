@@ -1,47 +1,45 @@
 
 
 export class TaskListItem {
-    constructor(config, name, link) {
-        this._config = config;
-        this._name = name;
-        this._link = link;
+    constructor(data) {
+        this._name = data.name;
+        this._link = data.link;
     }
 
 
     _getTemplate() {
-        return document.querySelector(this._config.templateItem).
-            content.children[0].
-            cloneNode(true);
+        const cardElement = document
+            .querySelector('#card')
+            .content
+            .querySelector('.card')
+            .cloneNode(true);
+
+        return cardElement;
     }
 
     _addEventListeners() {
-        this._view.querySelector(this._config.taskListItemDelete).
+        this._element.querySelector('.card__delete').
             addEventListener('click', this._deleteTask);
 
-        this._view.querySelector(this._config.taskListItemLikeButtom).
+        this._element.querySelector('.card__like').
             addEventListener('click', this._likeTask);
     }
 
     _deleteTask = (event) => {
         event.preventDefault();
-        this._view.remove(event);
+        this._element.remove();
     }
 
     _likeTask = (event) => {
         event.target.classList.toggle("card__like_active");
     }
 
-    render(tasksList) {
-        this._view = this._getTemplate();
 
-        const task = this._view.querySelector(this._config.taskListItemText);
-        task.textContent = this._name;
-        const urlArress = this._view.querySelector(this._config.taskListItemUrl);
-        urlArress.src = this._link;
-
+    generateCard() {
+        this._element = this._getTemplate();
+        this._element.querySelector('.card__title').textContent = this._name;
+        this._element.querySelector('.card__photo').src = this._link;
         this._addEventListeners();
-
-        tasksList.prepend(this._view);
+        return this._element;
     }
 };
-

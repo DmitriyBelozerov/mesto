@@ -1,10 +1,60 @@
+
 export class FormValidator {
-    constructor(config) {
+    constructor(config, element) {
         this._config = config;
+        this._element = element;
+
     }
 
+    _hasInvalidInput(element) {
+        return !element.validity.valid;
+    };
+
+    _hasInvalidForm(formInput) {
+        return formInput.some((element) => {
+            return !element.validity.valid;
+        });
+    };
+
+    _toggleButton(formInput, buttonElement, config) {
+        if (_hasInvalidForm(formInput)) {
+            buttonElement.classList.add(config.formSubmitDisabled);
+            buttonElement.setAttribute('disabled', true);
+        } else {
+            buttonElement.classList.remove(config.formSubmitDisabled);
+            buttonElement.removeAttribute('disabled', false);
+        };
+    };
+
+    _showInputError(_element, errorElement, config) {
+        this._element.classList.add(config.formInputTypeError);
+        errorElement.classList.remove(config.formErrorMessageHiden);
+        errorElement.textContent = inputItem.validationMessage;
+    };
+
+    _hideInputError(_element, errorElement, config) {
+        this._element.classList.remove(config.formInputTypeError);
+        errorElement.classList.add(config.formErrorMessageHiden);
+        errorElement.textContent = '';
+    };
+
+
+    enableValidation(element, config) {
+        const errorElement = this._element.nextElementSibling;
+        this._invalid = this._hasInvalidInput(element);
+        console.log(this._invalid);
+        // this._element.addEventListener('input', function () {
+        //     if (this._invalid(element)) {
+        //         _showInputError(element, errorElement, config);
+        //         _toggleButton(formInputs, buttonElement, config);
+        //     } else {
+        //         _hideInputError(element, errorElement, config);
+        //         _toggleButton(formInputs, buttonElement, config);
+        //     }
+        // });
+    };
+
 };
- 
 
 
 
@@ -13,16 +63,9 @@ export class FormValidator {
 
 
 
-// const validationConfig = {
-//     formSubmit: '.form__submit',
-//     formInput: '.form__input',
-//     form: '.form',
-//     formSubmitDisabled: 'form__submit_type_disabled',
-//     formInputTypeError: 'form__input_type_error',
-//     formErrorMessageHiden: 'form__error-message_hiden'
-// };
 
-// const forms = Array.from(document.querySelectorAll(validationConfig.form));
+
+//const forms = Array.from(document.querySelectorAll(validationConfig.form));
 
 
 // const hasInvalidInput = (inputItem) => {
