@@ -34,7 +34,6 @@ export class TaskListItem {
         event.target.classList.toggle("card__like_active");
     }
 
-
     generateCard() {
         this._element = this._getTemplate();
         this._element.querySelector('.card__title').textContent = this._name;
