@@ -1,9 +1,10 @@
 
 
 export class TaskListItem {
-    constructor(data) {
+    constructor(data, openPopup) {
         this._name = data.name;
         this._link = data.link;
+        this.openPopup = openPopup;
     }
 
 
@@ -23,6 +24,9 @@ export class TaskListItem {
 
         this._element.querySelector('.card__like').
             addEventListener('click', this._likeTask);
+
+        this._element.querySelector('.card__photo').
+            addEventListener('click', this._openPreview);
     }
 
     _deleteTask = (event) => {
@@ -32,6 +36,18 @@ export class TaskListItem {
 
     _likeTask = (event) => {
         event.target.classList.toggle("card__like_active");
+    }
+
+    _openPreview = () => {
+        const cardPhoto = this._element.querySelector('.card__photo');
+        const cardTitle = this._element.querySelector('.card__title');
+        const containerViewPhotoPhoto = document.querySelector('.container-view-photo__photo');
+        const containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
+        const popupViewPhoto = document.querySelector('.popup_view_photo');
+        containerViewPhotoPhoto.src = cardPhoto.src;
+        containerViewPhotoPhoto.alt = cardTitle.textContent;
+        containerViewPhotoTitle.textContent = cardTitle.textContent;
+        this.openPopup(popupViewPhoto);
     }
 
     generateCard() {

@@ -1,63 +1,14 @@
 
 export class FormValidator {
-    constructor(config, element, formItem) {
-        this._config = config;
-        this._element = element;
-        this._formItem = formItem;
+    constructor() {
+      
 
     }
 
-    _hasInvalidInput(_element) {
-        return !this._element.validity.valid;
-    };
-
-    // _hasInvalidForm(_formItem) {
-    //     return _formItem.some(_element => {
-    //         return !this._element.validity.valid;
-    //     });
-    // };
+ 
 
 
-
-    // _toggleButton(formInput, buttonElement, config) {
-    //     if (_hasInvalidForm(formInput)) {
-    //         buttonElement.classList.add(config.formSubmitDisabled);
-    //         buttonElement.setAttribute('disabled', true);
-    //     } else {
-    //         buttonElement.classList.remove(config.formSubmitDisabled);
-    //         buttonElement.removeAttribute('disabled', false);
-    //     };
-    // };
-
-    _showInputError(_element, errorElement, _config) {
-        this._element.classList.add(_config.formInputTypeError);
-        errorElement.classList.remove(_config.formErrorMessageHiden);
-        errorElement.textContent = this._element.validationMessage;
-    };
-
-    _hideInputError(_element, errorElement, _config) {
-        this._element.classList.remove(_config.formInputTypeError);
-        errorElement.classList.add(_config.formErrorMessageHiden);
-        errorElement.textContent = '';
-    };
-
-
-    enableValidation(_element, _config, _formItem) {
-        const errorElement = this._element.nextElementSibling;
-        this._invalidInput = this._hasInvalidInput(_element);
-        this._inputError = this._showInputError(_element, errorElement, _config);
-        this._invalidForm = this._formItem;
-
-        this._element.addEventListener('input', () => {
-            if (this._invalidInput) {
-                this._inputError;
-                // _toggleButton(formInputs, buttonElement, config);
-            } else {
-                _hideInputError(_element, errorElement, _config);
-                // _toggleButton(formInputs, buttonElement, config);
-            }
-        });
-    };
+ 
 
 };
 

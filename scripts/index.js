@@ -59,7 +59,7 @@ function closePopup(popup) {
     document.removeEventListener('keydown', handleEscClose);
 };
 
-function openPopup(popup) {
+const openPopup = popup => {
     popup.classList.add("popup_opened");
     document.addEventListener('keydown', handleEscClose);
 };
@@ -87,18 +87,12 @@ forms.forEach(formItem => {
 }
 );
 
+
+
 initialCards.forEach(item => {
-    const card = new TaskListItem(item);
+    const card = new TaskListItem(item, openPopup);
     const cardElement = card.generateCard();
-    const cardPhoto = cardElement.querySelector('.card__photo');
-    const cardTitle = cardElement.querySelector('.card__title');
     insertCard(cardElement);
-    cardElement.querySelector('.card__photo').addEventListener("click", () => {
-        containerViewPhotoPhoto.src = cardPhoto.src;
-        containerViewPhotoPhoto.alt = cardTitle.textContent;
-        containerViewPhotoTitle.textContent = cardTitle.textContent;
-        openPopup(popupViewPhoto);
-    });
 });
 
 const submitAddFotoCard = (event) => {
@@ -106,24 +100,18 @@ const submitAddFotoCard = (event) => {
     const card = new TaskListItem({
         name: formInputAddNamePhoto.value,
         link: formInputAddUrl.value,
-    });
+    }, openPopup);
     const cardElement = card.generateCard();
     insertCard(cardElement);
-    const cardPhoto = cardElement.querySelector('.card__photo');
-    const cardTitle = cardElement.querySelector('.card__title');
-    cardElement.querySelector('.card__photo').addEventListener("click", () => {
-        containerViewPhotoPhoto.src = cardPhoto.src;
-        containerViewPhotoPhoto.alt = cardTitle.textContent;
-        containerViewPhotoTitle.textContent = cardTitle.textContent;
-        openPopup(popupViewPhoto);
-    });
-
     formSubmitAddPhoto.reset();
     closePopup(popupAddPhoto);
     // formSubmitFoto.setAttribute('disabled', true);
     // formSubmitFoto.classList.add('form__submit_type_disabled');
 
 };
+
+
+
 
 function handleEscClose(evt) {
     const popupView = document.querySelector('.popup_opened');
@@ -216,7 +204,7 @@ const submitAddFotoCard = (event) => {
     formSubmitFoto.classList.add('form__submit_type_disabled');
 };
 
-const generateCardList = (cardData) => {
+const generateCardList = (cardData) => {  
     const newTemplatePhotoCard = cardTemplate.cloneNode(true);
     const titleNewCard = newTemplatePhotoCard.querySelector(".card__title");
     const likeButton = newTemplatePhotoCard.querySelector(".card__like");
@@ -243,10 +231,12 @@ const handleDeleteCard = (event) => {
     event.target.closest(".card").remove();
 };
 
+//генерируем карточки и вставляем в список
 const renderCard = (cardData) => {
     cardListContainer.prepend(generateCardList(cardData));
 };
 
+//обходим массив карточек
 initialCards.forEach((cardData) => {
     renderCard(cardData);
 });
