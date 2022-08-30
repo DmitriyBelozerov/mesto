@@ -1,14 +1,29 @@
 
 export class FormValidator {
-    constructor() {
-      
-
+    constructor(config, inputElement) {
+        config = config;
+        this.inputElement = inputElement;
     }
 
- 
+    showInputError(config) {
+        this.inputElement.classList.add(config.formInputTypeError);
+        // errorElement.classList.remove(config.formErrorMessageHiden);
+        // errorElement.textContent = inputItem.validationMessage;
+    }
+
+    // enableValidation() {
+    //     showInputError();
+    //     if (hasInvalidInput(inputItem)) {
+    //         showInputError(inputItem, errorElement, validationConfig);
+    //         toggleButton(formInputs, buttonElement, validationConfig);
+    //     } else {
+    //         hideInputError(inputItem, errorElement, validationConfig);
+    //         toggleButton(formInputs, buttonElement, validationConfig);
+    //     }
+    // };
 
 
- 
+
 
 };
 

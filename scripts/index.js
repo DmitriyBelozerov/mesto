@@ -78,63 +78,63 @@ function insertCard(element) {
 
 const forms = Array.from(document.querySelectorAll(config.form));
 forms.forEach(formItem => {
-    const buttonElement = formItem.querySelector(config.formSubmit);
+    //const buttonElement = formItem.querySelector(config.formSubmit);
     const formInputs = Array.from(formItem.querySelectorAll(config.formInput));
-    formInputs.forEach(element => {
-        const validator = new FormValidator(config, element, formItem);
-        validator.enableValidation(config, element, formItem);
-    });
-}
-);
-
-
-
-initialCards.forEach(item => {
-    const card = new TaskListItem(item, openPopup);
-    const cardElement = card.generateCard();
-    insertCard(cardElement);
-});
-
-const submitAddFotoCard = (event) => {
-    event.preventDefault();
-    const card = new TaskListItem({
-        name: formInputAddNamePhoto.value,
-        link: formInputAddUrl.value,
-    }, openPopup);
-    const cardElement = card.generateCard();
-    insertCard(cardElement);
-    formSubmitAddPhoto.reset();
-    closePopup(popupAddPhoto);
-    // formSubmitFoto.setAttribute('disabled', true);
-    // formSubmitFoto.classList.add('form__submit_type_disabled');
-
-};
-
-
-
-
-function handleEscClose(evt) {
-    const popupView = document.querySelector('.popup_opened');
-    if (evt.keyCode === keyNmbrEsc) {
-        closePopup(popupView);
-    };
-}
-
-formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
-profileEditButton.addEventListener("click", editOpenForm);
-formSubmitProfile.addEventListener("submit", submitProfileForm);
-profileAddButton.addEventListener("click", () => openPopup(popupAddPhoto));
-containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
-formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
-formCloseProfile.addEventListener("click", () => closePopup(formEdit));
-
-document.addEventListener("mousedown", (event) => {
-    const popup = event.target.classList.contains('popup');
-    const popupView = document.querySelector('.popup_opened');
-    if (popup) {
-        closePopup(popupView);
+    formInputs.forEach(inputElement => {
+        const validator = new FormValidator(config, inputElement);
+        inputElement.addEventListener('input', () => {validator.showInputError(config)});
     }
+    );
+
 });
+
+
+    initialCards.forEach(item => {
+        const card = new TaskListItem(item, openPopup);
+        const cardElement = card.generateCard();
+        insertCard(cardElement);
+    });
+
+    const submitAddFotoCard = (event) => {
+        event.preventDefault();
+        const card = new TaskListItem({
+            name: formInputAddNamePhoto.value,
+            link: formInputAddUrl.value,
+        }, openPopup);
+        const cardElement = card.generateCard();
+        insertCard(cardElement);
+        formSubmitAddPhoto.reset();
+        closePopup(popupAddPhoto);
+        // formSubmitFoto.setAttribute('disabled', true);
+        // formSubmitFoto.classList.add('form__submit_type_disabled');
+
+    };
+
+
+
+
+    function handleEscClose(evt) {
+        const popupView = document.querySelector('.popup_opened');
+        if (evt.keyCode === keyNmbrEsc) {
+            closePopup(popupView);
+        };
+    }
+
+    formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
+    profileEditButton.addEventListener("click", editOpenForm);
+    formSubmitProfile.addEventListener("submit", submitProfileForm);
+    profileAddButton.addEventListener("click", () => openPopup(popupAddPhoto));
+    containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
+    formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
+    formCloseProfile.addEventListener("click", () => closePopup(formEdit));
+
+    document.addEventListener("mousedown", (event) => {
+        const popup = event.target.classList.contains('popup');
+        const popupView = document.querySelector('.popup_opened');
+        if (popup) {
+            closePopup(popupView);
+        }
+    });
 
 
 

@@ -4,7 +4,8 @@ export class TaskListItem {
     constructor(data, openPopup) {
         this._name = data.name;
         this._link = data.link;
-        this.openPopup = openPopup;
+        this._openPopup = openPopup;
+        this._popupViewPhoto = document.querySelector('.popup_view_photo');
     }
 
 
@@ -43,11 +44,11 @@ export class TaskListItem {
         const cardTitle = this._element.querySelector('.card__title');
         const containerViewPhotoPhoto = document.querySelector('.container-view-photo__photo');
         const containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
-        const popupViewPhoto = document.querySelector('.popup_view_photo');
+        // const popupViewPhoto = document.querySelector('.popup_view_photo');
         containerViewPhotoPhoto.src = cardPhoto.src;
         containerViewPhotoPhoto.alt = cardTitle.textContent;
         containerViewPhotoTitle.textContent = cardTitle.textContent;
-        this.openPopup(popupViewPhoto);
+        this._openPopup(this._popupViewPhoto);
     }
 
     generateCard() {
