@@ -82,7 +82,7 @@ forms.forEach(formItem => {
     const formInputs = Array.from(formItem.querySelectorAll(config.formInput));
     formInputs.forEach(inputElement => {
         const validator = new FormValidator(config, inputElement);
-        inputElement.addEventListener('input', () => {validator.showInputError(config)});
+        inputElement.addEventListener('input', () => {validator.enableValidation(config)});
     }
     );
 

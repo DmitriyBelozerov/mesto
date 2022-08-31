@@ -44,7 +44,6 @@ export class TaskListItem {
         const cardTitle = this._element.querySelector('.card__title');
         const containerViewPhotoPhoto = document.querySelector('.container-view-photo__photo');
         const containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
-        // const popupViewPhoto = document.querySelector('.popup_view_photo');
         containerViewPhotoPhoto.src = cardPhoto.src;
         containerViewPhotoPhoto.alt = cardTitle.textContent;
         containerViewPhotoTitle.textContent = cardTitle.textContent;
