@@ -4,6 +4,7 @@ export class FormValidator {
         config = config;
         this.inputElement = inputElement;
         this.errorElement = this.inputElement.nextElementSibling;
+        this.buttonElement = this.inputElement.parentElement.querySelector(config.formSubmit);
 
     }
 
@@ -23,6 +24,7 @@ export class FormValidator {
         this.errorElement.textContent = '';
 
     };
+
 
     enableValidation(config) {
         if (this._hasInvalidInput(this.inputElement)) {

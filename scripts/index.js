@@ -7,8 +7,8 @@ const initialCards = [
         link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
     },
     {
-        name: "Челябинская область",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+        name: "Новосибирск",
+        link: "https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL25zazIwMTgvODBfbnNrMjAxOC5qcGc_X19pZD0xMTQwMzU=.jpeg",
     },
 ];
 
@@ -78,7 +78,7 @@ function insertCard(element) {
 
 const forms = Array.from(document.querySelectorAll(config.form));
 forms.forEach(formItem => {
-    //const buttonElement = formItem.querySelector(config.formSubmit);
+    const buttonElement = formItem.querySelector(config.formSubmit);
     const formInputs = Array.from(formItem.querySelectorAll(config.formInput));
     formInputs.forEach(inputElement => {
         const validator = new FormValidator(config, inputElement);
@@ -87,6 +87,9 @@ forms.forEach(formItem => {
     );
 
 });
+
+
+
 
 
     initialCards.forEach(item => {
@@ -105,9 +108,6 @@ forms.forEach(formItem => {
         insertCard(cardElement);
         formSubmitAddPhoto.reset();
         closePopup(popupAddPhoto);
-        // formSubmitFoto.setAttribute('disabled', true);
-        // formSubmitFoto.classList.add('form__submit_type_disabled');
-
     };
 
 
