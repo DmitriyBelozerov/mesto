@@ -1,13 +1,10 @@
-
-
-export class TaskListItem {
+export class Card {
     constructor(data, openPopup) {
         this._name = data.name;
         this._link = data.link;
         this._openPopup = openPopup;
         this._popupViewPhoto = document.querySelector('.popup_view_photo');
     }
-
 
     _getTemplate() {
         const cardElement = document
@@ -18,7 +15,6 @@ export class TaskListItem {
 
         return cardElement;
     }
-
     _addEventListeners() {
         this._element.querySelector('.card__delete').
             addEventListener('click', this._deleteTask);
@@ -29,16 +25,13 @@ export class TaskListItem {
         this._element.querySelector('.card__photo').
             addEventListener('click', this._openPreview);
     }
-
     _deleteTask = (event) => {
         event.preventDefault();
         this._element.remove();
     }
-
     _likeTask = (event) => {
         event.target.classList.toggle("card__like_active");
     }
-
     _openPreview = () => {
         const cardPhoto = this._element.querySelector('.card__photo');
         const cardTitle = this._element.querySelector('.card__title');
