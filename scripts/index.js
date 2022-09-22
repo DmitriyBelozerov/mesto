@@ -10,6 +10,18 @@ const initialCards = [
         name: "Новосибирск",
         link: "https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL25zazIwMTgvODBfbnNrMjAxOC5qcGc_X19pZD0xMTQwMzU=.jpeg",
     },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
 ];
 
 const config = {
@@ -25,7 +37,7 @@ const config = {
     form: '.form',
     formSubmitDisabled: 'form__submit_type_disabled',
     formInputTypeError: 'form__input_type_error',
-    
+
 }
 
 const profileEditButton = document.querySelector(".profile__edit");
@@ -47,6 +59,7 @@ const containerViewPhotoButtonClose = document.querySelector('.container-view-ph
 const formSubmitFoto = formSubmitAddPhoto.querySelector('.form__submit');
 const keyNmbrEsc = 27;
 const forms = Array.from(document.querySelectorAll(config.form));
+
 
 function editOpenForm() {
     openPopup(formEdit);
