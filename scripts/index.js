@@ -58,8 +58,8 @@ const popupAddPhoto = document.querySelector(".popup_add_photo");
 const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
 const formSubmitFoto = formSubmitAddPhoto.querySelector('.form__submit');
 const keyNmbrEsc = 27;
-const forms = Array.from(document.querySelectorAll(config.form));
-
+const formSendingProfile = document.querySelector('.form__sending_profile');
+const formSendingFoto = document.querySelector('.form__sending_foto_add');
 
 function editOpenForm() {
     openPopup(formEdit);
@@ -88,37 +88,6 @@ function insertCard(element) {
     document.querySelector('.cards').prepend(element);
 };
 
-const hasInvalidForm = (formItem) => {
-    return formItem.some((inputElement) => {
-        return !inputElement.validity.valid;
-    });
-};
-
-const toggleButton = (formItem, buttonElement, config) => {
-    if (hasInvalidForm(formItem)) {
-        buttonElement.classList.add(config.formSubmitDisabled);
-        buttonElement.setAttribute('disabled', true);
-    } else {
-        buttonElement.classList.remove(config.formSubmitDisabled);
-        buttonElement.removeAttribute('disabled', false);
-    };
-};
-
-forms.forEach(formItem => {
-    const buttonElement = formItem.querySelector(config.formSubmit);
-    const formInputs = Array.from(formItem.querySelectorAll(config.formInput));
-    formInputs.forEach(inputElement => {
-        const validator = new FormValidator(config, inputElement);
-        inputElement.addEventListener('input', () => { validator.enableValidation(config) });
-
-        inputElement.addEventListener('input', () => {
-            toggleButton(formInputs, buttonElement, config);
-        });
-
-    }
-    );
-});
-
 initialCards.forEach(item => {
     const card = new Card(item, openPopup);
     const cardElement = card.generateCard();
@@ -145,6 +114,11 @@ function handleEscClose(evt) {
         closePopup(popupView);
     };
 }
+
+const validatorSendingFoto = new FormValidator(config, formSendingFoto);
+validatorSendingFoto.enableValidation(config);
+const validatorSendingProfile = new FormValidator(config, formSendingProfile);
+validatorSendingProfile.enableValidation(config);
 
 formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
 profileEditButton.addEventListener("click", editOpenForm);
