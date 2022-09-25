@@ -40,7 +40,7 @@ export class Card {
     }
 
     _openPreview = () => {
-                this._containerViewPhotoName.src = this._cardPhoto.src;
+        this._containerViewPhotoName.src = this._cardPhoto.src;
         this._containerViewPhotoName.alt = this._cardTitle.textContent;
         this._containerViewPhotoTitle.textContent = this._cardTitle.textContent;
         this._openPopup(this._popupViewPhoto);
