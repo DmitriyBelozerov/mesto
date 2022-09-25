@@ -6,11 +6,11 @@ export class Card {
         this._popupViewPhoto = document.querySelector('.popup_view_photo');
         this._containerViewPhotoName = document.querySelector('.container-view-photo__photo');
         this._containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
+        this._element = this._getTemplate();
         this._cardDelete = this._element.querySelector('.card__delete');
         this._cardLike = this._element.querySelector('.card__like');
         this._cardPhoto = this._element.querySelector('.card__photo');
         this._cardTitle = this._element.querySelector('.card__title');
-        this._element = this._getTemplate();
     }
 
     _getTemplate() {
@@ -40,7 +40,7 @@ export class Card {
     }
 
     _openPreview = () => {
-        this._containerViewPhotoName.src = this._cardPhoto.src;
+                this._containerViewPhotoName.src = this._cardPhoto.src;
         this._containerViewPhotoName.alt = this._cardTitle.textContent;
         this._containerViewPhotoTitle.textContent = this._cardTitle.textContent;
         this._openPopup(this._popupViewPhoto);
