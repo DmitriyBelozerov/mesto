@@ -15,21 +15,18 @@
     </header>
 
     <section class="profile">
-        <img src="https://i.pinimg.com/originals/1a/b4/7f/1ab47f206db3cf8b60fee05821ae399b.jpg" alt="аватар пользователя" class="profile__avatar" />
-
+        <img src="https://i.pinimg.com/originals/1a/b4/7f/1ab47f206db3cf8b60fee05821ae399b.jpg"
+            alt="аватар пользователя" class="profile__avatar" />
         <div class="profile__info">
             <h1 class="profile__name">Губка Боб</h1>
             <button class="profile__edit" type="button" aria-label="edit_profile"></button>
             <p class="profile__about-name">Квадратные штаны</p>
         </div>
-
         <button class="profile__add-button" type="button" aria-label="add_profile"></button>
     </section>
 
     <section class="galary">
         <ul class="cards">
-
-            
         </ul>
     </section>
 
@@ -42,16 +39,13 @@
             <button class="form__close form__close_profile" type="button" aria-label="close"></button>
             <h3 class="form__title">Редактировать профиль</h3>
             <form class="form__sending form__sending_profile" action="#" novalidate>
-
                 <input id="name" class="form__input form__input_type_name" type="text" name="input-name" value=""
                     placeholder="Имя" minlength="2" maxlength="40" required>
                 <span id="error-name" class="form__error-message form__error-message_hiden"></span>
-
                 <input id="profession" class="form__input form__input_type_about" type="text" name="input-about"
-                    value="" placeholder="Профессия" minlength="2" maxlength="200"  required>
+                    value="" placeholder="Профессия" minlength="2" maxlength="200" required>
                 <span id="error-profession" class="form__error-message form__error-message_hiden"></span>
-
-                <button class="form__submit form__submit_profile form__submit_type_disabled" type="submit" >
+                <button class="form__submit form__submit_profile form__submit_type_disabled" type="submit">
                     Сохранить
                 </button>
             </form>
@@ -63,16 +57,13 @@
             <button class="form__close form__close_add-photo" type="button" aria-label="close"></button>
             <h3 class="form__title">Новое место</h3>
             <form class="form__sending form__sending_foto_add" action="#" novalidate>
-
                 <input id="photo-name" class="form__input form__input_add_photo" type="text" name="input-photo-name"
                     value="" placeholder="Название" minlength="2" maxlength="30" required>
                 <span id="error-photo-name" class="form__error-message form__error-message_hiden"></span>
-
                 <input id="photo-url" class="form__input form__input_add_url" type="url" name="input-photo-url" value=""
                     placeholder="Ссылка" required>
                 <span id="error-photo-url" class="form__error-message form__error-message_hiden"></span>
-
-                <button class="form__submit form__submit_foto form__submit_type_disabled" type="submit" disabled>
+                <button class="form__submit form__submit_foto form__submit_type_disabled" type="submit">
                     Создать
                 </button>
             </form>

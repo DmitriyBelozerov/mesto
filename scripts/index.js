@@ -56,10 +56,12 @@ const profileAddButton = document.querySelector(".profile__add-button");
 const formCloseAddPhoto = document.querySelector(".form__close_add-photo");
 const popupAddPhoto = document.querySelector(".popup_add_photo");
 const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
-const formSubmitFoto = formSubmitAddPhoto.querySelector('.form__submit');
+const cardsList = document.querySelector('.cards');
 const keyNmbrEsc = 27;
 const formSendingProfile = document.querySelector('.form__sending_profile');
 const formSendingFoto = document.querySelector('.form__sending_foto_add');
+
+
 
 function editOpenForm() {
     openPopup(formEdit);
@@ -85,32 +87,32 @@ function submitProfileForm(event) {
 };
 
 function insertCard(element) {
-    document.querySelector('.cards').prepend(element);
+    cardsList.prepend(element);
+};
+
+function createCard(item) {
+    const card = new Card(item, openPopup);
+    const cardElement = card.generateCard();
+    return cardElement
 };
 
 initialCards.forEach(item => {
-    const card = new Card(item, openPopup);
-    const cardElement = card.generateCard();
-    insertCard(cardElement);
+    insertCard(createCard(item));
 });
 
 const submitAddFotoCard = (event) => {
     event.preventDefault();
-    const card = new Card({
+    insertCard(createCard({
         name: formInputAddNamePhoto.value,
         link: formInputAddUrl.value,
-    }, openPopup);
-    const cardElement = card.generateCard();
-    insertCard(cardElement);
+    }));
     formSubmitAddPhoto.reset();
     closePopup(popupAddPhoto);
-    formSubmitFoto.setAttribute('disabled', true);
-    formSubmitFoto.classList.add('form__submit_type_disabled');
 };
 
 function handleEscClose(evt) {
-    const popupView = document.querySelector('.popup_opened');
     if (evt.keyCode === keyNmbrEsc) {
+        const popupView = document.querySelector('.popup_opened');
         closePopup(popupView);
     };
 }
@@ -121,9 +123,9 @@ const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
 
 formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
-profileEditButton.addEventListener("click", editOpenForm);
+profileEditButton.addEventListener("click", () => {editOpenForm(); validatorSendingProfile.resetValidation()});
 formSubmitProfile.addEventListener("submit", submitProfileForm);
-profileAddButton.addEventListener("click", () => openPopup(popupAddPhoto));
+profileAddButton.addEventListener("click", () => {openPopup(popupAddPhoto); validatorSendingFoto.resetValidation()});
 containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
 formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
 formCloseProfile.addEventListener("click", () => closePopup(formEdit));
