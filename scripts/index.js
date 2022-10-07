@@ -1,5 +1,7 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
+// В файле index.js должно остаться только создание классов и добавление некоторых обработчиков
+
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 
 const initialCards = [
     {

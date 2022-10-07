@@ -1,4 +1,10 @@
-export class Card {
+// Свяжите класс Card c попапом. 
+// Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick. 
+// Эта функция должна открывать попап с картинкой при клике на карточку.
+
+//Если классы нужно связать друг с другом, делайте это передаваемой в конструктор функцией-колбэком.
+
+export default class Card {
     constructor(data, openPopup) {
         this._name = data.name;
         this._link = data.link;
