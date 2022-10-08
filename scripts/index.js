@@ -2,6 +2,8 @@
 
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import Section from "./Section.js";
+
 
 const initialCards = [
     {
@@ -88,19 +90,25 @@ function submitProfileForm(event) {
     closePopup(formEdit);
 };
 
-function insertCard(element) {
-    cardsList.prepend(element);
-};
 
-function createCard(item) {
-    const card = new Card(item, openPopup);
-    const cardElement = card.generateCard();
-    return cardElement
-};
+const render = item => { const card = new Card(item); }
+const section = new Section(initialCards, config.tasksList, render);
+section.log();
 
-initialCards.forEach(item => {
-    insertCard(createCard(item));
-});
+// const insertCard = (element) => {
+//     section.addItem(element)
+// };
+
+// function createCard(item) {
+//     const card = new Card(item, openPopup);
+//     const cardElement = card.generateCard();
+//     return cardElement
+// };
+
+// initialCards.forEach(item => {
+//     insertCard(createCard(item));
+// });
+
 
 const submitAddFotoCard = (event) => {
     event.preventDefault();
@@ -125,9 +133,9 @@ const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
 
 formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
-profileEditButton.addEventListener("click", () => {editOpenForm(); validatorSendingProfile.resetValidation()});
+profileEditButton.addEventListener("click", () => { editOpenForm(); validatorSendingProfile.resetValidation() });
 formSubmitProfile.addEventListener("submit", submitProfileForm);
-profileAddButton.addEventListener("click", () => {openPopup(popupAddPhoto); validatorSendingFoto.resetValidation()});
+profileAddButton.addEventListener("click", () => { openPopup(popupAddPhoto); validatorSendingFoto.resetValidation() });
 containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
 formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
 formCloseProfile.addEventListener("click", () => closePopup(formEdit));

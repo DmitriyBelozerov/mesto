@@ -45,12 +45,12 @@ export default class Card {
         event.target.classList.toggle("card__like_active");
     }
 
-    _openPreview = () => {
-        this._containerViewPhotoName.src = this._cardPhoto.src;
-        this._containerViewPhotoName.alt = this._cardTitle.textContent;
-        this._containerViewPhotoTitle.textContent = this._cardTitle.textContent;
-        this._openPopup(this._popupViewPhoto);
-    }
+    // _openPreview = () => {
+    //     this._containerViewPhotoName.src = this._cardPhoto.src;
+    //     this._containerViewPhotoName.alt = this._cardTitle.textContent;
+    //     this._containerViewPhotoTitle.textContent = this._cardTitle.textContent;
+    //     this._openPopup(this._popupViewPhoto);
+    // }
 
     generateCard() {
         this._cardTitle.textContent = this._name;
