@@ -90,35 +90,29 @@ function submitProfileForm(event) {
     closePopup(formEdit);
 };
 
-
-const render = item => { const card = new Card(item); }
-const section = new Section(initialCards, config.tasksList, render);
-section.log();
-
-// const insertCard = (element) => {
-//     section.addItem(element)
-// };
-
-// function createCard(item) {
-//     const card = new Card(item, openPopup);
-//     const cardElement = card.generateCard();
-//     return cardElement
-// };
-
-// initialCards.forEach(item => {
-//     insertCard(createCard(item));
-// });
-
+const section = new Section({
+    data: initialCards,
+    renderer: (initialCards) => {
+        const card = new Card(initialCards);
+        const cardElement = card.generateCard();
+        section.addItem(cardElement);
+    }
+},
+    config.tasksList);
 
 const submitAddFotoCard = (event) => {
     event.preventDefault();
-    insertCard(createCard({
+    const newPhotoItem = new Card({
         name: formInputAddNamePhoto.value,
         link: formInputAddUrl.value,
-    }));
-    formSubmitAddPhoto.reset();
+    }
+    );
+    const newCard = newPhotoItem.generateCard();
+    section.addItem(newCard);
     closePopup(popupAddPhoto);
 };
+
+section.renderAllElements();
 
 function handleEscClose(evt) {
     if (evt.keyCode === keyNmbrEsc) {
