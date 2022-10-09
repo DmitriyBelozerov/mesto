@@ -2,7 +2,10 @@ export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
         this._buttonClose = this._popupSelector.querySelector('.form__close');
+        
         this.keyNmbrEsc = 27;
+        this._containerViewPhotoName = document.querySelector('.container-view-photo__photo');
+
     }
 
     _handleEscClose(evt) {
@@ -12,9 +15,9 @@ export default class Popup {
         };
     }
 
-    //слушатель иконки закрытие попАп и клик затемненной области вокруг формы
+    // слушатель иконки закрытие попАп и клик затемненной области вокруг формы
     setEventListeners() {
-        this._buttonClose.addEventListener('click',this.close.bind(this));
+        this._buttonClose.addEventListener('click', this.close.bind(this));
         document.addEventListener("mousedown", (event) => {
             const popup = event.target.classList.contains('popup');
             if (popup) {

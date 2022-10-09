@@ -3,6 +3,7 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 const initialCards = [
     {
@@ -40,7 +41,7 @@ const config = {
     form: '.form',
     formSubmitDisabled: 'form__submit_type_disabled',
     formInputTypeError: 'form__input_type_error',
-} 
+}
 
 const profileEditButton = document.querySelector(".profile__edit");
 const formCloseProfile = document.querySelector(".form__close_profile");
@@ -65,7 +66,6 @@ const formSendingFoto = document.querySelector('.form__sending_foto_add');
 function editOpenForm() {
     const popup = new Popup(formEdit);
     popup.open();
-    
     formNameElement.value = nameProfile.textContent;
     formJobNameElement.value = aboutProfile.textContent;
 };
@@ -74,13 +74,13 @@ function submitProfileForm(event) {
     event.preventDefault();
     nameProfile.textContent = formNameElement.value;
     aboutProfile.textContent = formJobNameElement.value;
-    closePopup(formEdit);
+    
 };
 
 const section = new Section({
     data: initialCards,
     renderer: (initialCards) => {
-        const card = new Card(initialCards);
+        const card = new Card(initialCards, handleCardClick);
         const cardElement = card.generateCard();
         section.addItem(cardElement);
     }
@@ -92,12 +92,17 @@ const submitAddFotoCard = (event) => {
     const newPhotoItem = new Card({
         name: formInputAddNamePhoto.value,
         link: formInputAddUrl.value,
-    }
+    }, handleCardClick
     );
     const newCard = newPhotoItem.generateCard();
     section.addItem(newCard);
     closePopup(popupAddPhoto);
 };
+
+const handleCardClick = (popupSelector, element) => {
+    const popupWithImage = new PopupWithImage(popupSelector, element);
+    popupWithImage.open();
+}
 
 section.renderAllElements();
 
@@ -110,9 +115,23 @@ formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
 profileEditButton.addEventListener("click", () => { editOpenForm(); validatorSendingProfile.resetValidation() });
 formSubmitProfile.addEventListener("submit", submitProfileForm);
 profileAddButton.addEventListener("click", () => { openPopup(popupAddPhoto); validatorSendingFoto.resetValidation() });
-containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
+// containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
 formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
 // formCloseProfile.addEventListener("click", () => closePopup(formEdit));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // document.addEventListener("mousedown", (event) => {
 //     const popup = event.target.classList.contains('popup');
