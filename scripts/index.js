@@ -1,9 +1,8 @@
 // В файле index.js должно остаться только создание классов и добавление некоторых обработчиков
-
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
-
+import Popup from "./Popup.js";
 
 const initialCards = [
     {
@@ -41,8 +40,7 @@ const config = {
     form: '.form',
     formSubmitDisabled: 'form__submit_type_disabled',
     formInputTypeError: 'form__input_type_error',
-
-}
+} 
 
 const profileEditButton = document.querySelector(".profile__edit");
 const formCloseProfile = document.querySelector(".form__close_profile");
@@ -61,26 +59,15 @@ const formCloseAddPhoto = document.querySelector(".form__close_add-photo");
 const popupAddPhoto = document.querySelector(".popup_add_photo");
 const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
 const cardsList = document.querySelector('.cards');
-const keyNmbrEsc = 27;
 const formSendingProfile = document.querySelector('.form__sending_profile');
 const formSendingFoto = document.querySelector('.form__sending_foto_add');
 
-
-
 function editOpenForm() {
-    openPopup(formEdit);
+    const popup = new Popup(formEdit);
+    popup.open();
+    
     formNameElement.value = nameProfile.textContent;
     formJobNameElement.value = aboutProfile.textContent;
-};
-
-function closePopup(popup) {
-    popup.classList.remove("popup_opened");
-    document.removeEventListener('keydown', handleEscClose);
-};
-
-const openPopup = popup => {
-    popup.classList.add("popup_opened");
-    document.addEventListener('keydown', handleEscClose);
 };
 
 function submitProfileForm(event) {
@@ -114,13 +101,6 @@ const submitAddFotoCard = (event) => {
 
 section.renderAllElements();
 
-function handleEscClose(evt) {
-    if (evt.keyCode === keyNmbrEsc) {
-        const popupView = document.querySelector('.popup_opened');
-        closePopup(popupView);
-    };
-}
-
 const validatorSendingFoto = new FormValidator(config, formSendingFoto);
 validatorSendingFoto.enableValidation(config);
 const validatorSendingProfile = new FormValidator(config, formSendingProfile);
@@ -132,12 +112,12 @@ formSubmitProfile.addEventListener("submit", submitProfileForm);
 profileAddButton.addEventListener("click", () => { openPopup(popupAddPhoto); validatorSendingFoto.resetValidation() });
 containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
 formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
-formCloseProfile.addEventListener("click", () => closePopup(formEdit));
+// formCloseProfile.addEventListener("click", () => closePopup(formEdit));
 
-document.addEventListener("mousedown", (event) => {
-    const popup = event.target.classList.contains('popup');
-    const popupView = document.querySelector('.popup_opened');
-    if (popup) {
-        closePopup(popupView);
-    }
-});
+// document.addEventListener("mousedown", (event) => {
+//     const popup = event.target.classList.contains('popup');
+//     const popupView = document.querySelector('.popup_opened');
+//     if (popup) {
+//         closePopup(popupView);
+//     }
+// });
