@@ -4,6 +4,7 @@ import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 const initialCards = [
     {
@@ -62,20 +63,32 @@ const containerViewPhotoButtonClose = document.querySelector('.container-view-ph
 const cardsList = document.querySelector('.cards');
 const formSendingProfile = document.querySelector('.form__sending_profile');
 const formSendingFoto = document.querySelector('.form__sending_foto_add');
+const popupEditProfile = document.querySelector('.popup_edit_profile');
 
-function editOpenForm() {
-    const popup = new Popup(formEdit);
-    popup.open();
-    formNameElement.value = nameProfile.textContent;
-    formJobNameElement.value = aboutProfile.textContent;
-};
 
-function submitProfileForm(event) {
-    event.preventDefault();
-    nameProfile.textContent = formNameElement.value;
-    aboutProfile.textContent = formJobNameElement.value;
-    
-};
+
+const popupWithForm = new PopupWithForm({
+    popupSelector: popupEditProfile,
+    submitForm: (inputValues) => {
+        console.log(inputValues);
+        nameProfile.textContent = inputValues.inputName;
+        aboutProfile.textContent = inputValues.inputAbout;
+    }
+}
+);
+
+// formNameElement.value = nameProfile.textContent;
+// formJobNameElement.value = aboutProfile.textContent;
+
+
+
+
+// function submitProfileForm(event) {
+//     event.preventDefault();
+//     nameProfile.textContent = formNameElement.value;
+//     aboutProfile.textContent = formJobNameElement.value;
+
+// };
 
 const section = new Section({
     data: initialCards,
@@ -112,8 +125,8 @@ const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
 
 formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
-profileEditButton.addEventListener("click", () => { editOpenForm(); validatorSendingProfile.resetValidation() });
-formSubmitProfile.addEventListener("submit", submitProfileForm);
+profileEditButton.addEventListener("click", () => { popupWithForm.open(); validatorSendingProfile.resetValidation() });
+// formSubmitProfile.addEventListener("submit", submitProfileForm);
 profileAddButton.addEventListener("click", () => { openPopup(popupAddPhoto); validatorSendingFoto.resetValidation() });
 // containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
 formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));

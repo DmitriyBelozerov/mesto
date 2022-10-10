@@ -14,7 +14,7 @@ export default class Popup {
             this.close();
         };
     }
-
+ 
     // слушатель иконки закрытие попАп и клик затемненной области вокруг формы
     setEventListeners() {
         this._buttonClose.addEventListener('click', this.close.bind(this));
