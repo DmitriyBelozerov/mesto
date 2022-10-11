@@ -2,7 +2,7 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
-import Popup from "./Popup.js";
+// import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 
@@ -70,25 +70,26 @@ const popupEditProfile = document.querySelector('.popup_edit_profile');
 const popupWithForm = new PopupWithForm({
     popupSelector: popupEditProfile,
     submitForm: (inputValues) => {
-        console.log(inputValues);
         nameProfile.textContent = inputValues.inputName;
         aboutProfile.textContent = inputValues.inputAbout;
     }
 }
 );
 
-// formNameElement.value = nameProfile.textContent;
-// formJobNameElement.value = aboutProfile.textContent;
+const popupFormSubmitPhoto = new PopupWithForm({
+    popupSelector: popupAddPhoto,
+    submitForm: (inputValues) => {
+        const newPhotoItem = new Card({
+            name: inputValues.inputPhotoName,
+            link: inputValues.inputPhotoUrl,
+        }, handleCardClick
+        );
+        const newCard = newPhotoItem.generateCard();
+        section.addItem(newCard);
+    },
 
-
-
-
-// function submitProfileForm(event) {
-//     event.preventDefault();
-//     nameProfile.textContent = formNameElement.value;
-//     aboutProfile.textContent = formJobNameElement.value;
-
-// };
+}
+)
 
 const section = new Section({
     data: initialCards,
@@ -99,18 +100,6 @@ const section = new Section({
     }
 },
     config.tasksList);
-
-const submitAddFotoCard = (event) => {
-    event.preventDefault();
-    const newPhotoItem = new Card({
-        name: formInputAddNamePhoto.value,
-        link: formInputAddUrl.value,
-    }, handleCardClick
-    );
-    const newCard = newPhotoItem.generateCard();
-    section.addItem(newCard);
-    closePopup(popupAddPhoto);
-};
 
 const handleCardClick = (popupSelector, element) => {
     const popupWithImage = new PopupWithImage(popupSelector, element);
@@ -124,13 +113,9 @@ validatorSendingFoto.enableValidation(config);
 const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
 
-formSubmitAddPhoto.addEventListener("submit", submitAddFotoCard);
 profileEditButton.addEventListener("click", () => { popupWithForm.open(); validatorSendingProfile.resetValidation() });
-// formSubmitProfile.addEventListener("submit", submitProfileForm);
-profileAddButton.addEventListener("click", () => { openPopup(popupAddPhoto); validatorSendingFoto.resetValidation() });
-// containerViewPhotoButtonClose.addEventListener("click", () => closePopup(popupViewPhoto));
-formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
-// formCloseProfile.addEventListener("click", () => closePopup(formEdit));
+profileAddButton.addEventListener("click", () => { popupFormSubmitPhoto.open(); validatorSendingFoto.resetValidation() });
+// formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
 
 
 
