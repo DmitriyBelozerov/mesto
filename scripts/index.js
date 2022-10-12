@@ -2,9 +2,9 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
-// import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
 const initialCards = [
     {
@@ -66,13 +66,16 @@ const formSendingFoto = document.querySelector('.form__sending_foto_add');
 const popupEditProfile = document.querySelector('.popup_edit_profile');
 
 
-
-const popupWithForm = new PopupWithForm({
+const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupEditProfile,
-    submitForm: (inputValues) => {
-        nameProfile.textContent = inputValues.inputName;
-        aboutProfile.textContent = inputValues.inputAbout;
+    submitForm: () => {
+
+        const userInfo = new UserInfo({ nameProfile, aboutProfile });
     }
+    // (inputValues) => {
+    //     nameProfile.textContent = inputValues.inputName;
+    //     aboutProfile.textContent = inputValues.inputAbout;
+    // }
 }
 );
 
@@ -113,9 +116,8 @@ validatorSendingFoto.enableValidation(config);
 const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
 
-profileEditButton.addEventListener("click", () => { popupWithForm.open(); validatorSendingProfile.resetValidation() });
+profileEditButton.addEventListener("click", () => { popupWithFormProfile.open(); validatorSendingProfile.resetValidation() });
 profileAddButton.addEventListener("click", () => { popupFormSubmitPhoto.open(); validatorSendingFoto.resetValidation() });
-// formCloseAddPhoto.addEventListener("click", () => closePopup(popupAddPhoto));
 
 
 

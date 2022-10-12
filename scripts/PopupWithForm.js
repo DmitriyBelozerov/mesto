@@ -21,26 +21,20 @@ export default class PopupWithForm extends Popup {
     // Перезаписывает родительский метод setEventListeners. Метод setEventListeners класса
     //       PopupWithForm должен не только добавлять обработчик клика иконке закрытия, но и добавлять обработчик сабмита формы.
     setEventListeners() {
-        this._buttonClose.addEventListener('click', this.close.bind(this));
+        super.setEventListeners();
         this._form.addEventListener('submit',  (event) => { 
             event.preventDefault();
             this._submitForm(this._getInputValues());
             this.close();
         });
 
-        document.addEventListener("mousedown", (event) => {
-            const popup = event.target.classList.contains('popup');
-            if (popup) {
-                this.close();
-            }
-        });
+       
     }
 
     // Перезаписывает родительский метод close, 
     // так как при закрытии попапа форма должна ещё и сбрасываться.
     close() {
-        this._popupSelector.classList.remove("popup_opened");
-        document.removeEventListener('keydown', (evt) => { this._handleEscClose(evt) });
+        super.close();
         this._form.reset();
     }
 

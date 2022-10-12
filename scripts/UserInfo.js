@@ -1,25 +1,37 @@
-// отвечает за управление отображением информации о пользователе на странице
 export default class UserInfo {
-  constructor({ userName, UserInfo }) {
+  constructor({ nameProfile, aboutProfile }) {
+    this._userName = nameProfile;
+    this._userInfo = aboutProfile;
 
   }
 
-  //  возвращает объект с данными пользователя
-  // Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии
   getUserInfo() {
-    this._inputList = this._element.querySelectorAll('.form__input');
-    // создаём пустой объект
     this._formValues = {};
-    // добавляем в этот объект значения всех полей
-    this._inputList.forEach(input => {
-      this._formValues[input.name] = input.value;
-    });
-    // возвращаем объект значений
+    this._formValues.name = this._userName.textContent;
+    this._formValues.info = this._userInfo.textContent;
+    console.log(this._formValues);
     return this._formValues;
   }
 
-  //   принимает новые данные пользователя и добавляет их на страницу
   setUserInfo() {
-
+    this._nameProfile.textContent = this._userName;
+    this._aboutProfile.textContent = this._userInfo;
   }
 } 
+
+
+// export default class UserInfo {
+//   constructor ({name, info}) {
+//     this._name = name;
+//     this._info = info;
+//   }
+
+//   getUserInfo() {
+//     return {name: this._name.textContent, info: this._info.textContent};
+//   }
+
+//   setUserInfo(name, info) {
+//     this._name.textContent = name;
+//     this._info.textContent = info;
+//   }
+// }
