@@ -68,16 +68,15 @@ const popupEditProfile = document.querySelector('.popup_edit_profile');
 
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupEditProfile,
-    submitForm: () => {
+    submitForm:
+        (inputList) => {
+            const info = new UserInfo({ nameProfile, aboutProfile });
+            info.setUserInfo(inputList.inputName, inputList.inputAbout);
+        }
 
-        const userInfo = new UserInfo({ nameProfile, aboutProfile });
-    }
-    // (inputValues) => {
-    //     nameProfile.textContent = inputValues.inputName;
-    //     aboutProfile.textContent = inputValues.inputAbout;
-    // }
 }
 );
+
 
 const popupFormSubmitPhoto = new PopupWithForm({
     popupSelector: popupAddPhoto,
@@ -116,27 +115,21 @@ validatorSendingFoto.enableValidation(config);
 const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
 
-profileEditButton.addEventListener("click", () => { popupWithFormProfile.open(); validatorSendingProfile.resetValidation() });
-profileAddButton.addEventListener("click", () => { popupFormSubmitPhoto.open(); validatorSendingFoto.resetValidation() });
+profileEditButton.addEventListener("click", () => {
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener("mousedown", (event) => {
-//     const popup = event.target.classList.contains('popup');
-//     const popupView = document.querySelector('.popup_opened');
-//     if (popup) {
-//         closePopup(popupView);
-//     }
-// });
+    const userInfo = new UserInfo({ nameProfile, aboutProfile });
+    const fillInputs = userInfo.getUserInfo();
+    formNameElement.value = fillInputs.name;
+    formJobNameElement.value = fillInputs.info;
+    console.log(formNameElement);
+    console.log(formNameElement.value);
+    popupWithFormProfile.setEventListeners();
+    validatorSendingProfile.resetValidation();
+    popupWithFormProfile.open();
+});
+profileAddButton.addEventListener("click", () => {
+    popupFormSubmitPhoto.open();
+    popupFormSubmitPhoto.setEventListeners();
+    validatorSendingFoto.resetValidation();
+});
