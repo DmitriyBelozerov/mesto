@@ -45,22 +45,12 @@ const config = {
 }
 
 const profileEditButton = document.querySelector(".profile__edit");
-const formCloseProfile = document.querySelector(".form__close_profile");
-const formEdit = document.querySelector(".popup_edit_profile");
-const popupViewPhoto = document.querySelector('.popup_view_photo');
 const formNameElement = document.querySelector(".form__input_type_name");
 const formJobNameElement = document.querySelector(".form__input_type_about");
-const formSubmitProfile = document.querySelector(".form_edit_profile");
 const nameProfile = document.querySelector(".profile__name");
 const aboutProfile = document.querySelector(".profile__about-name");
-const formInputAddNamePhoto = document.querySelector(".form__input_add_photo");
-const formInputAddUrl = document.querySelector(".form__input_add_url");
-const formSubmitAddPhoto = document.querySelector(".form__sending_foto_add");
 const profileAddButton = document.querySelector(".profile__add-button");
-const formCloseAddPhoto = document.querySelector(".form__close_add-photo");
 const popupAddPhoto = document.querySelector(".popup_add_photo");
-const containerViewPhotoButtonClose = document.querySelector('.container-view-photo__button-close');
-const cardsList = document.querySelector('.cards');
 const formSendingProfile = document.querySelector('.form__sending_profile');
 const formSendingFoto = document.querySelector('.form__sending_foto_add');
 const popupEditProfile = document.querySelector('.popup_edit_profile');
@@ -73,10 +63,8 @@ const popupWithFormProfile = new PopupWithForm({
             const info = new UserInfo({ nameProfile, aboutProfile });
             info.setUserInfo(inputList.inputName, inputList.inputAbout);
         }
-
 }
 );
-
 
 const popupFormSubmitPhoto = new PopupWithForm({
     popupSelector: popupAddPhoto,
@@ -89,9 +77,7 @@ const popupFormSubmitPhoto = new PopupWithForm({
         const newCard = newPhotoItem.generateCard();
         section.addItem(newCard);
     },
-
-}
-)
+})
 
 const section = new Section({
     data: initialCards,
@@ -106,6 +92,7 @@ const section = new Section({
 const handleCardClick = (popupSelector, element) => {
     const popupWithImage = new PopupWithImage(popupSelector, element);
     popupWithImage.open();
+    popupWithImage.setEventListeners();
 }
 
 section.renderAllElements();
@@ -116,20 +103,18 @@ const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
 
 profileEditButton.addEventListener("click", () => {
-    
-
+    validatorSendingProfile.resetValidation();
     const userInfo = new UserInfo({ nameProfile, aboutProfile });
     const fillInputs = userInfo.getUserInfo();
     formNameElement.value = fillInputs.name;
     formJobNameElement.value = fillInputs.info;
-    console.log(formNameElement);
-    console.log(formNameElement.value);
     popupWithFormProfile.setEventListeners();
-    validatorSendingProfile.resetValidation();
     popupWithFormProfile.open();
 });
+
 profileAddButton.addEventListener("click", () => {
     popupFormSubmitPhoto.open();
     popupFormSubmitPhoto.setEventListeners();
     validatorSendingFoto.resetValidation();
 });
+
