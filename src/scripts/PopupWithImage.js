@@ -7,7 +7,7 @@ export default class PopupWithImage extends Popup {
         this._cardPhoto = element.querySelector('.card__photo');
         this._cardTitle = element.querySelector('.card__title');
         this._containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
-
+        this._buttonClose = this._popupSelector.querySelector('.container-view-photo__button-close');
 
 
 

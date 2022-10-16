@@ -15,7 +15,6 @@ module.exports = {
         static: path.resolve(__dirname, './dist'), // путь, куда "смотрит" режим разработчика
         compress: true, // это ускорит загрузку в режиме разработки
         port: 8080,
-
         open: true
     },
     module: {

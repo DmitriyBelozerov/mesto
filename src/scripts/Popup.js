@@ -10,6 +10,7 @@ export default class Popup {
         if (evt.keyCode === this.keyNmbrEsc) {
             this.close();
         };
+        
     }
 
     setEventListeners() {
