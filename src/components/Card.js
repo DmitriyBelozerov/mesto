@@ -1,11 +1,12 @@
 export default class Card {
-    constructor(data, handleCardClick) {
+    constructor(data, selectorTemplate, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
+        this._selectorTemplate = selectorTemplate;
         this._handleCardClick = handleCardClick;
-        this._popupViewPhoto = document.querySelector('.popup_view_photo');
-        this._containerViewPhotoName = document.querySelector('.container-view-photo__photo');
-        this._containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
+        // this._ViewPhoto = '.popup_view_photo';
+        // this._containerViewPhotoName = document.querySelector('.container-view-photo__photo');
+        // this._containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
         this._element = this._getTemplate();
         this._cardDelete = this._element.querySelector('.card__delete');
         this._cardLike = this._element.querySelector('.card__like');
@@ -15,7 +16,7 @@ export default class Card {
 
     _getTemplate() {
         const cardElement = document
-            .querySelector('#card')
+            .querySelector(this._selectorTemplate)
             .content
             .querySelector('.card')
             .cloneNode(true);
@@ -28,7 +29,7 @@ export default class Card {
         this._cardLike.
             addEventListener('click', this._likeTask);
         this._cardPhoto.
-            addEventListener('click',() =>(this._handleCardClick(this._popupViewPhoto, this._element)));
+            addEventListener('click',() =>{this._handleCardClick(this._name, this._link)});
     }
 
     _deleteTask = (event) => {
