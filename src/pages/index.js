@@ -73,13 +73,10 @@ const section = new Section({
     }
 },
     config.tasksList);
-
 section.renderAllElements();
 
 const popupWithImage = new PopupWithImage(popupViewPhoto);
 popupWithImage.setEventListeners();
-
-
 
 const validatorSendingFoto = new FormValidator(config, formSendingFoto);
 validatorSendingFoto.enableValidation(config);

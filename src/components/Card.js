@@ -4,9 +4,6 @@ export default class Card {
         this._link = data.link;
         this._selectorTemplate = selectorTemplate;
         this._handleCardClick = handleCardClick;
-        // this._ViewPhoto = '.popup_view_photo';
-        // this._containerViewPhotoName = document.querySelector('.container-view-photo__photo');
-        // this._containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
         this._element = this._getTemplate();
         this._cardDelete = this._element.querySelector('.card__delete');
         this._cardLike = this._element.querySelector('.card__like');

@@ -64,8 +64,6 @@ export default class FormValidator {
         });
     };
 
-
-
     enableValidation(config) {
         this.inputs.forEach((input) => {
             this._addEventListeners(input, this.inputs, config);
