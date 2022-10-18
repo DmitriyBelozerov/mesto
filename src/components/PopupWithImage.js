@@ -4,7 +4,15 @@ export default class PopupWithImage extends Popup {
     constructor(popupSelector) {
         super(popupSelector);
         this._buttonClose = this._popup.querySelector('.container-view-photo__button-close');
+        this._title = this._popup.querySelector('.container-view-photo__title');
+        this._image = this._popup.querySelector('.container-view-photo__photo');
+    }
+
+    open(name, link){
+        super.open();
+        this._title.textContent = name;
+        this._image.src = link;
+        this._image.alt = name;
     }
 }
 
-//Михаил, по твоим рекомендациям сделал функцию handleCardClick в index.js. Поэтому необходимость перезаписывать метод open() пропала. 

@@ -21,8 +21,6 @@ import {
     formSendingFoto,
     popupEditProfile,
     selectorTemplate,
-    containerViewPhotoPhoto,
-    containerViewPhotoTitle,
     popupViewPhoto
 } from "../utils/constants.js";
 
@@ -37,13 +35,6 @@ const popupWithFormProfile = new PopupWithForm({
 }
 );
 popupWithFormProfile.setEventListeners();
-
-// function handleCardClick(name, link) {
-//     containerViewPhotoTitle.textContent = name;
-//     containerViewPhotoPhoto.alt = name;
-//     containerViewPhotoPhoto.src = link;
-//     popupWithImage.open();
-// }
 
 function handleCardClick(name, link) {
     popupWithImage.open(name, link);
