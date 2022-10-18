@@ -38,11 +38,15 @@ const popupWithFormProfile = new PopupWithForm({
 );
 popupWithFormProfile.setEventListeners();
 
+// function handleCardClick(name, link) {
+//     containerViewPhotoTitle.textContent = name;
+//     containerViewPhotoPhoto.alt = name;
+//     containerViewPhotoPhoto.src = link;
+//     popupWithImage.open();
+// }
+
 function handleCardClick(name, link) {
-    containerViewPhotoTitle.textContent = name;
-    containerViewPhotoPhoto.alt = name;
-    containerViewPhotoPhoto.src = link;
-    popupWithImage.open();
+    popupWithImage.open(name, link);
 }
 
 function createCard(item) {
