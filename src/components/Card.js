@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(data, selectorTemplate, handleCardClick) {
+    constructor(data, selectorTemplate, handleCardClick, api) {
         this._name = data.name;
         this._link = data.link;
         this._selectorTemplate = selectorTemplate;
@@ -9,6 +9,7 @@ export default class Card {
         this._cardLike = this._element.querySelector('.card__like');
         this._cardPhoto = this._element.querySelector('.card__photo');
         this._cardTitle = this._element.querySelector('.card__title');
+        this._api = api;
     }
 
     _getTemplate() {
@@ -17,7 +18,7 @@ export default class Card {
             .content
             .querySelector('.card')
             .cloneNode(true);
-        return cardElement;
+        return cardElement; 
     }
 
     _addEventListeners = () => {

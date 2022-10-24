@@ -6,9 +6,11 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from '../components/Api';
+
+
 
 import {
-    initialCards,
     config,
     profileEditButton,
     formNameElement,
@@ -21,10 +23,48 @@ import {
     formSendingFoto,
     popupEditProfile,
     selectorTemplate,
-    popupViewPhoto
+    popupViewPhoto,
+    apiOptions,
 } from "../utils/constants.js";
 
-const info = new UserInfo({ nameProfile, aboutProfile });
+const api = new Api(apiOptions);
+
+let section;
+
+api.getCards()
+    .then((data) => {
+        const initialCards = data;
+        section = new Section({
+            data: initialCards,
+            renderer: (item) => { section.addItem(createCard(item)) }
+        },
+            config.tasksList, api);
+        section.renderAllElements();
+    })
+
+let popupFormSubmitPhoto;
+
+popupFormSubmitPhoto = new PopupWithForm({
+    popupSelector: popupAddPhoto,
+    submitForm: (inputValues) => {
+        section.addItem(createCard({
+            name: inputValues.inputPhotoName,
+            link: inputValues.inputPhotoUrl
+        }));
+    },
+})
+
+popupFormSubmitPhoto.setEventListeners();
+
+const info = new UserInfo(nameProfile, aboutProfile);
+
+api.getProfile()
+    .then((data) => {
+        info.setUserInfo(data.name, data.about)
+    })
+
+
+
 
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupEditProfile,
@@ -32,8 +72,8 @@ const popupWithFormProfile = new PopupWithForm({
         (inputList) => {
             info.setUserInfo(inputList.inputName, inputList.inputAbout);
         }
-}
-);
+});
+
 popupWithFormProfile.setEventListeners();
 
 function handleCardClick(name, link) {
@@ -45,30 +85,13 @@ function createCard(item) {
         item,
         selectorTemplate,
         handleCardClick,
+        api
     );
     const cardElement = newPhotoItem.generateCard();
     return cardElement;
 }
 
-const popupFormSubmitPhoto = new PopupWithForm({
-    popupSelector: popupAddPhoto,
-    submitForm: (inputValues) => {
-        section.addItem(createCard({
-            name: inputValues.inputPhotoName,
-            link: inputValues.inputPhotoUrl
-        }));
-    },
-})
-popupFormSubmitPhoto.setEventListeners();
 
-const section = new Section({
-    data: initialCards,
-    renderer: (item) => {
-        section.addItem(createCard(item));
-    }
-},
-    config.tasksList);
-section.renderAllElements();
 
 const popupWithImage = new PopupWithImage(popupViewPhoto);
 popupWithImage.setEventListeners();
@@ -79,6 +102,7 @@ const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
 
 profileEditButton.addEventListener("click", () => {
+
     const fillInputs = info.getUserInfo();
     formNameElement.value = fillInputs.name;
     formJobNameElement.value = fillInputs.info;
@@ -91,5 +115,8 @@ profileAddButton.addEventListener("click", () => {
     popupFormSubmitPhoto.open();
     validatorSendingFoto.resetValidation(config);
 });
+
+
+
 
 

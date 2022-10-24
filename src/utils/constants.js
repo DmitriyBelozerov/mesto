@@ -1,25 +1,3 @@
-export const initialCards = [
-    {
-        name: "Архыз",
-        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-    },
-    {
-        name: "Новосибирск",
-        link: "https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL25zazIwMTgvODBfbnNrMjAxOC5qcGc_X19pZD0xMTQwMzU=.jpeg",
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 export const config = {
     tasksList: '.cards',
@@ -35,6 +13,12 @@ export const config = {
     formSubmitDisabled: 'form__submit_type_disabled',
     formInputTypeError: 'form__input_type_error',
 };
+export const apiOptions = {
+    urlProfile: "https://nomoreparties.co/v1/cohort-52/users/me",
+    urlSaveProfile: "https://mesto.nomoreparties.co/v1/cohort-52/users/me",
+    urlCards: "https://mesto.nomoreparties.co/v1/cohort-52/cards",
+    token: 'eedc1c72-62bc-4062-b0d7-5fb34f1900fa',
+}
 
 export const profileEditButton = document.querySelector(".profile__edit");
 export const formNameElement = document.querySelector(".form__input_type_name");
