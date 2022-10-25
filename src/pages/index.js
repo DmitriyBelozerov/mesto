@@ -11,17 +11,9 @@ import Api from '../components/Api';
 
 
 import {
-    config,
-    profileEditButton,
-    formNameElement,
-    formJobNameElement,
-    nameProfile,
-    aboutProfile,
-    profileAddButton,
-    popupAddPhoto,
-    formSendingProfile,
-    formSendingFoto,
-    popupEditProfile,
+    config, profileEditButton, formNameElement,
+    formJobNameElement, nameProfile, aboutProfile, profileAddButton,
+    popupAddPhoto, formSendingProfile, formSendingFoto, popupEditProfile,
     selectorTemplate,
     popupViewPhoto,
     apiOptions,
@@ -29,40 +21,47 @@ import {
 
 const api = new Api(apiOptions);
 
-let section;
+const section = new Section(
+    { renderer: (item) => { section.addItem(createCard(item)) } },
+    config.tasksList
+);
 
 api.getCards()
     .then((data) => {
-        const initialCards = data;
-        section = new Section({
-            data: initialCards,
-            renderer: (item) => { section.addItem(createCard(item)) }
-        },
-            config.tasksList, api);
+        section.setItems(data)
         section.renderAllElements();
     })
+
+
+
 
 let popupFormSubmitPhoto;
 
 popupFormSubmitPhoto = new PopupWithForm({
     popupSelector: popupAddPhoto,
     submitForm: (inputValues) => {
-        section.addItem(createCard({
-            name: inputValues.inputPhotoName,
-            link: inputValues.inputPhotoUrl
-        }));
+        api.createNewCard(inputValues.inputPhotoName, inputValues.inputPhotoUrl)
+            .then(data => {
+                section.addItem(
+                    createCard(data)
+                )
+            })
     },
 })
 
 popupFormSubmitPhoto.setEventListeners();
 
 const info = new UserInfo(nameProfile, aboutProfile);
-
+let yyy;
 api.getProfile()
-    .then((data) => {
-        info.setUserInfo(data.name, data.about)
+    .then((userData) => {
+        info.setUserInfo(userData.name, userData.about);
+         return yyy = info.getUserInfo();
+        // console.log(yyy);
     })
 
+
+    console.log(yyy);
 
 
 
@@ -70,9 +69,15 @@ const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupEditProfile,
     submitForm:
         (inputList) => {
-            info.setUserInfo(inputList.inputName, inputList.inputAbout);
+            api.saveProfile(inputList.inputName, inputList.inputAbout)
+                .then((data) => {
+                    info.setUserInfo(data.name, data.about);
+                })
         }
 });
+
+
+
 
 popupWithFormProfile.setEventListeners();
 
@@ -80,18 +85,18 @@ function handleCardClick(name, link) {
     popupWithImage.open(name, link);
 }
 
-function createCard(item) {
+
+
+function createCard(data) {
     const newPhotoItem = new Card(
-        item,
+        data,
         selectorTemplate,
         handleCardClick,
-        api
+        // getUser
     );
     const cardElement = newPhotoItem.generateCard();
     return cardElement;
 }
-
-
 
 const popupWithImage = new PopupWithImage(popupViewPhoto);
 popupWithImage.setEventListeners();

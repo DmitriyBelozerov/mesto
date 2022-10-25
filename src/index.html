@@ -17,9 +17,9 @@
         <img src="https://i.pinimg.com/originals/1a/b4/7f/1ab47f206db3cf8b60fee05821ae399b.jpg"
             alt="аватар пользователя" class="profile__avatar" />
         <div class="profile__info">
-            <h1 class="profile__name">г</h1>
+            <h1 class="profile__name"></h1>
             <button class="profile__edit" type="button" aria-label="edit_profile"></button>
-            <p class="profile__about-name">к</p>
+            <p class="profile__about-name"></p>
         </div>
         <button class="profile__add-button" type="button" aria-label="add_profile"></button>
     </section>
@@ -77,11 +77,26 @@
         </div>
     </div>
 
+    <div class="popup popup_confirmation-delete">
+        <div class="form form_confirmation-delete">
+            <button class="form__close form__close_confirmation-delete" type="button" aria-label="close"></button>
+            <h3 class="form__title form__title_confirmation-delete">Вы уверенны?</h3>
+            <form class="form__sending form__sending_confirmation-delete" action="#" novalidate>
+                <button class="form__submit form__submit_confirmation-delete" type="submit">
+                    да
+                </button>
+            </form>
+        </div>
+    </div>
+
     <template id="card">
         <li class="card ">
             <img alt="фото" class="card__photo" src="#">
             <h2 class="card__title "></h2>
-            <button class="card__like " type="button" aria-label="like"></button>
+            <div class="card__like-section">
+                <button class="card__like " type="button" aria-label="like"></button>
+                <span class="card__like-users"></span>
+            </div>
             <button class="card__delete " type="button" aria-label="delete"></button>
         </li>
     </template>

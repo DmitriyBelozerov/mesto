@@ -6,7 +6,15 @@ export default class Api {
         this._token = config.token;
     }
 
+    _getJsonOrError(res) {
 
+        if (res.ok) {
+            return res.json();
+        }
+        throw new Error('Ошибка при загрузке данных с сервера')
+
+
+    }
 
 
     getProfile() {
@@ -15,15 +23,7 @@ export default class Api {
                 authorization: this._token
             }
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(new Error(res.status));
-            })
-            .catch(err => {
-                Promise.reject(err)
-            })
+            .then(this._getJsonOrError)
     }
 
 
@@ -33,15 +33,7 @@ export default class Api {
                 authorization: this._token
             }
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(new Error(res.status));
-            })
-            .catch(err => {
-                Promise.reject(err)
-            })
+            .then(this._getJsonOrError)
     }
 
     saveProfile(newName, newAbout) {
@@ -52,60 +44,41 @@ export default class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: newName,
-                link: newAbout
+                name: `${newName}`,
+                about: `${newAbout}`
             }),
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(new Error(res.status));
-            })
-            .catch(err => {
-                Promise.reject(err)
-            })
+            .then(this._getJsonOrError)
     }
 
-    createCard(name, link) {
+    createNewCard(newName, newLink) {
         return fetch(this._urlCards, {
             method: 'POST',
             headers: {
                 authorization: this._token,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, link }),
+            body: JSON.stringify({
+                name: `${newName}`,
+                link: `${newLink}`
+            }),
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(new Error(res.status));
-            })
-            .catch(err => {
-                Promise.reject(err)
-            })
+            .then(this._getJsonOrError)
     }
 
-    deleteCard(id) {
-        return fetch(`${this._urlCards}/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: this._token,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, link }),
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(new Error(res.status));
-            })
-            .catch(err => {
-                Promise.reject(err)
-            })
-    }
+
+    
+    // deleteCard(id) {
+    //     return fetch(`${this._urlCards}/${id}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             authorization: this._token,
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ name, link }),
+    //     })
+    //         .then(this._getJsonOrError)
+    // }
 
 
 
