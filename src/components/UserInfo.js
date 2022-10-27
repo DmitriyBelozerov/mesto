@@ -21,7 +21,6 @@ export default class UserInfo {
   }
 
   submitAvatar(data) {
-    // console.log(this._avatar.style);
-    this._avatar.style.background = `url(${data.avatar}) center no-repeat`;
+    this._avatar.style.background = `url(${data.avatar}) no-repeat`;
   }
 }

@@ -6,21 +6,29 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupDeleteCard from '../components/PopupDeleteCard';
-// import PopupSubmitAvatar from '../components/popupSubmitAvatar';
 import UserInfo from "../components/UserInfo.js";
 import Api from '../components/Api';
-
-
-
 import {
-    config, profileEditButton, formNameElement,
-    formJobNameElement, nameProfile, aboutProfile, profileAddButton,
-    popupAddPhoto, formSendingProfile, formSendingFoto, popupEditProfile,
-    selectorTemplate, popupViewPhoto,
-    apiOptions, popupConfirmationDelete, formSubmitAvatar, buttonAvatar, popupSelectorSubmitAvatar
-} from "../utils/constants.js";
-
-// console.log(buttonAvatar);
+    config,
+    profileEditButton,
+    formNameElement,
+    formJobNameElement,
+    nameProfile,
+    aboutProfile,
+    profileAddButton,
+    popupAddPhoto,
+    formSendingProfile,
+    formSendingFoto,
+    popupEditProfile,
+    selectorTemplate,
+    popupViewPhoto,
+    apiOptions,
+    popupConfirmationDelete,
+    formSubmitAvatar,
+    buttonAvatar,
+    popupSelectorSubmitAvatar
+}
+    from "../utils/constants.js";
 
 let userId = null;
 const api = new Api(apiOptions);
@@ -36,7 +44,7 @@ api.getCards()
         section.setItems(data)
         section.renderAllElements();
     })
-    .catch(err=>console.log(err))
+    .catch(err => console.log(err))
 
 const popupFormSubmitPhoto = new PopupWithForm({
     popupSelector: popupAddPhoto,
@@ -47,10 +55,10 @@ const popupFormSubmitPhoto = new PopupWithForm({
                     createCard(data)
                 )
             })
-            .then(()=>{
+            .then(() => {
                 popupFormSubmitPhoto.close();
             })
-            .catch(err=>console.log(err))
+            .catch(err => console.log(err))
     },
 })
 popupFormSubmitPhoto.setEventListeners();
@@ -63,9 +71,13 @@ const popupWithFormProfile = new PopupWithForm({
                 .then((data) => {
                     info.setUserInfo(data.name, data.about);
                 })
-                .catch(err=>console.log(err))
+                .then(() => {
+                    popupWithFormProfile.close();
+                })
+                .catch(err => console.log(err))
         }
 });
+
 popupWithFormProfile.setEventListeners();
 
 api.getProfile()
@@ -74,27 +86,24 @@ api.getProfile()
         userId = userData._id;
         info.submitAvatar(userData);
     })
-    .catch(err=>console.log(err))
+    .catch(err => console.log(err))
 
 function handleCardClick(name, link) {
     popupWithImage.open(name, link);
 }
 
 function handleCardDelete(id, element) {
-    const popupDelete = new PopupDeleteCard(
-        {
+    const popupDelete = new PopupDeleteCard(        {
             popupSelector: popupConfirmationDelete,
             submitForm: (id) => {
                 api.deleteCard(id)
-                .then (()=>{
-                    element.remove();
-
-                })
-                .then(()=>{
-                    popupDelete.close();
-
-                })
-                .catch(err=>console.log(err))
+                    .then(() => {
+                        element.remove();
+                    })
+                    .then(() => {
+                        popupDelete.close();
+                    })
+                    .catch(err => console.log(err))
             }
         }
     );
@@ -110,8 +119,6 @@ function deleteLike(id) {
     return api.deleteLike(id);
 }
 
-
-
 function createCard(data) {
     const newPhotoCard = new Card(
         selectorTemplate,
@@ -126,7 +133,6 @@ function createCard(data) {
     return cardElement;
 }
 
-
 const popupSubmitAvatar = new PopupWithForm({
     popupSelector: popupSelectorSubmitAvatar,
     submitForm: (inputList) => {
@@ -134,14 +140,14 @@ const popupSubmitAvatar = new PopupWithForm({
             .then((data) => {
                 info.submitAvatar(data);
             })
-            .catch(err=>console.log(err))
+            .then(() => {
+                popupSubmitAvatar.close();
+            })
+            .catch(err => console.log(err))
     }
 })
 
-
 popupSubmitAvatar.setEventListeners();
-
-
 
 const popupWithImage = new PopupWithImage(popupViewPhoto);
 popupWithImage.setEventListeners();
@@ -154,7 +160,6 @@ const validatorformSubmitAvatar = new FormValidator(config, formSubmitAvatar);
 validatorformSubmitAvatar.enableValidation(config);
 
 profileEditButton.addEventListener("click", () => {
-
     const fillInputs = info.getUserInfo();
     formNameElement.value = fillInputs.name;
     formJobNameElement.value = fillInputs.info;
@@ -170,6 +175,7 @@ profileAddButton.addEventListener("click", () => {
 
 buttonAvatar.addEventListener("click", () => {
     popupSubmitAvatar.open();
+    validatorformSubmitAvatar.resetValidation(config);
 })
 
 
