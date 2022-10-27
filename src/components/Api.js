@@ -68,19 +68,52 @@ export default class Api {
 
 
     
-    // deleteCard(id) {
-    //     return fetch(`${this._urlCards}/${id}`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             authorization: this._token,
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ name, link }),
-    //     })
-    //         .then(this._getJsonOrError)
-    // }
+    deleteCard(id) {
+        return fetch(`${this._urlCards}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(this._getJsonOrError)
+    }
 
+    markLike(id) {
+        return fetch(`${this._urlCards}/${id}/likes`, {
+            method: 'PUT',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(this._getJsonOrError)
+    }
 
+    deleteLike(id) {
+        return fetch(`${this._urlCards}/${id}/likes`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(this._getJsonOrError)
+    }
+
+    submitAvatar(link) {
+        return fetch(`${this._urlSaveProfile}/avatar`, {
+            method: 'PATCH',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                avatar: `${link}`
+            }),
+        })
+            .then(this._getJsonOrError)
+    }
 
 
 }

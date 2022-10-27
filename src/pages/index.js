@@ -5,6 +5,8 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupDeleteCard from '../components/PopupDeleteCard';
+// import PopupSubmitAvatar from '../components/popupSubmitAvatar';
 import UserInfo from "../components/UserInfo.js";
 import Api from '../components/Api';
 
@@ -14,12 +16,15 @@ import {
     config, profileEditButton, formNameElement,
     formJobNameElement, nameProfile, aboutProfile, profileAddButton,
     popupAddPhoto, formSendingProfile, formSendingFoto, popupEditProfile,
-    selectorTemplate,
-    popupViewPhoto,
-    apiOptions,
+    selectorTemplate, popupViewPhoto,
+    apiOptions, popupConfirmationDelete, formSubmitAvatar, buttonAvatar, popupSelectorSubmitAvatar
 } from "../utils/constants.js";
 
+// console.log(buttonAvatar);
+
+let userId = null;
 const api = new Api(apiOptions);
+const info = new UserInfo(nameProfile, aboutProfile);
 
 const section = new Section(
     { renderer: (item) => { section.addItem(createCard(item)) } },
@@ -31,13 +36,9 @@ api.getCards()
         section.setItems(data)
         section.renderAllElements();
     })
+    .catch(err=>console.log(err))
 
-
-
-
-let popupFormSubmitPhoto;
-
-popupFormSubmitPhoto = new PopupWithForm({
+const popupFormSubmitPhoto = new PopupWithForm({
     popupSelector: popupAddPhoto,
     submitForm: (inputValues) => {
         api.createNewCard(inputValues.inputPhotoName, inputValues.inputPhotoUrl)
@@ -46,24 +47,13 @@ popupFormSubmitPhoto = new PopupWithForm({
                     createCard(data)
                 )
             })
+            .then(()=>{
+                popupFormSubmitPhoto.close();
+            })
+            .catch(err=>console.log(err))
     },
 })
-
 popupFormSubmitPhoto.setEventListeners();
-
-const info = new UserInfo(nameProfile, aboutProfile);
-let yyy;
-api.getProfile()
-    .then((userData) => {
-        info.setUserInfo(userData.name, userData.about);
-         return yyy = info.getUserInfo();
-        // console.log(yyy);
-    })
-
-
-    console.log(yyy);
-
-
 
 const popupWithFormProfile = new PopupWithForm({
     popupSelector: popupEditProfile,
@@ -73,30 +63,85 @@ const popupWithFormProfile = new PopupWithForm({
                 .then((data) => {
                     info.setUserInfo(data.name, data.about);
                 })
+                .catch(err=>console.log(err))
         }
 });
-
-
-
-
 popupWithFormProfile.setEventListeners();
+
+api.getProfile()
+    .then((userData) => {
+        info.setUserInfo(userData.name, userData.about);
+        userId = userData._id;
+        info.submitAvatar(userData);
+    })
+    .catch(err=>console.log(err))
 
 function handleCardClick(name, link) {
     popupWithImage.open(name, link);
 }
 
+function handleCardDelete(id, element) {
+    const popupDelete = new PopupDeleteCard(
+        {
+            popupSelector: popupConfirmationDelete,
+            submitForm: (id) => {
+                api.deleteCard(id)
+                .then (()=>{
+                    element.remove();
+
+                })
+                .then(()=>{
+                    popupDelete.close();
+
+                })
+                .catch(err=>console.log(err))
+            }
+        }
+    );
+    popupDelete.setEventListeners();
+    popupDelete.open(id);
+}
+
+function markLike(id) {
+    return api.markLike(id);
+}
+
+function deleteLike(id) {
+    return api.deleteLike(id);
+}
+
 
 
 function createCard(data) {
-    const newPhotoItem = new Card(
-        data,
+    const newPhotoCard = new Card(
         selectorTemplate,
         handleCardClick,
-        // getUser
+        userId,
+        handleCardDelete,
+        markLike,
+        deleteLike
     );
-    const cardElement = newPhotoItem.generateCard();
+    newPhotoCard.getData(data);
+    const cardElement = newPhotoCard.generateCard();
     return cardElement;
 }
+
+
+const popupSubmitAvatar = new PopupWithForm({
+    popupSelector: popupSelectorSubmitAvatar,
+    submitForm: (inputList) => {
+        api.submitAvatar(inputList.avatar)
+            .then((data) => {
+                info.submitAvatar(data);
+            })
+            .catch(err=>console.log(err))
+    }
+})
+
+
+popupSubmitAvatar.setEventListeners();
+
+
 
 const popupWithImage = new PopupWithImage(popupViewPhoto);
 popupWithImage.setEventListeners();
@@ -105,6 +150,8 @@ const validatorSendingFoto = new FormValidator(config, formSendingFoto);
 validatorSendingFoto.enableValidation(config);
 const validatorSendingProfile = new FormValidator(config, formSendingProfile);
 validatorSendingProfile.enableValidation(config);
+const validatorformSubmitAvatar = new FormValidator(config, formSubmitAvatar);
+validatorformSubmitAvatar.enableValidation(config);
 
 profileEditButton.addEventListener("click", () => {
 
@@ -121,7 +168,9 @@ profileAddButton.addEventListener("click", () => {
     validatorSendingFoto.resetValidation(config);
 });
 
-
+buttonAvatar.addEventListener("click", () => {
+    popupSubmitAvatar.open();
+})
 
 
 

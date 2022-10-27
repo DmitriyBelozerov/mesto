@@ -2,6 +2,36 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
+    background: url(https://i.pinimg.com/originals/1a/b4/7f/1ab47f206db3cf8b60fee05821ae399b.jpg) center no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.5s linear 0s;
+    box-shadow: none;
+    position: relative;
+
+}
+
+
+
+
+.profile__avatar:hover {
+    opacity: 0.2;
+
+}
+
+.profile__avatar:hover::after {
+    /* background: url(../../../images/AvatarHover.svg); */
+    content: url(../../../images/AvatarHover.svg);
+    display: block;
+    position: absolute;
+    right: 45px;
+    top: 45px;
+    z-index: 2;
+    color: white;
+    opacity: none;
+    transition: opacity 0.5s linear 0s;
+
 }
 
 @media (max-width: 650px) {

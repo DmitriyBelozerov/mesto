@@ -5,6 +5,7 @@
     display: grid;
     grid-template-columns: 120px 1fr 150px;
     align-items: center;
+    position: relative;
 }
 
 @media (max-width: 650px) {

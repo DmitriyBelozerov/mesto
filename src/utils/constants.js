@@ -18,6 +18,10 @@ export const apiOptions = {
     urlSaveProfile: "https://mesto.nomoreparties.co/v1/cohort-52/users/me",
     urlCards: "https://mesto.nomoreparties.co/v1/cohort-52/cards",
     token: 'eedc1c72-62bc-4062-b0d7-5fb34f1900fa',
+    // headers: {
+    //     authorization: this._token,
+    //     'Content-Type': 'application/json'
+    // },
 }
 
 export const profileEditButton = document.querySelector(".profile__edit");
@@ -29,10 +33,19 @@ export const profileAddButton = document.querySelector(".profile__add-button");
 export const popupAddPhoto = ".popup_add_photo";
 export const formSendingProfile = document.querySelector('.form__sending_profile');
 export const formSendingFoto = document.querySelector('.form__sending_foto_add');
+export const formSubmitAvatar = document.querySelector('.form__sending_submit-avatar');
 export const popupEditProfile = '.popup_edit_profile';
 export const selectorTemplate = '#card';
 export const containerViewPhotoPhoto = document.querySelector('.container-view-photo__photo');
 export const containerViewPhotoTitle = document.querySelector('.container-view-photo__title');
 export const popupViewPhoto = '.popup_view_photo';
+export const popupConfirmationDelete = '.popup_confirmation-delete';
+export const buttonCardDelete = document.querySelector('.card__delete');
+export const buttonAvatar = document.querySelector('.profile__avatar');
+export const popupSelectorSubmitAvatar = '.popup_submit-avatar';
+
+
+
+
 
 

@@ -14,8 +14,11 @@
     </header>
 
     <section class="profile">
-        <img src="https://i.pinimg.com/originals/1a/b4/7f/1ab47f206db3cf8b60fee05821ae399b.jpg"
-            alt="аватар пользователя" class="profile__avatar" />
+     
+            <!-- <img src="https://i.pinimg.com/originals/1a/b4/7f/1ab47f206db3cf8b60fee05821ae399b.jpg"
+                alt="аватар пользователя" class="profile__avatar" /> -->
+   
+                <button class="profile__avatar" type="button" aria-label="avatar"></button>
         <div class="profile__info">
             <h1 class="profile__name"></h1>
             <button class="profile__edit" type="button" aria-label="edit_profile"></button>
@@ -41,8 +44,8 @@
                 <input id="name" class="form__input form__input_type_name" type="text" name="inputName" value=""
                     placeholder="Имя" minlength="2" maxlength="40" required>
                 <span id="error-name" class="form__error-message form__error-message_hiden"></span>
-                <input id="profession" class="form__input form__input_type_about" type="text" name="inputAbout"
-                    value="" placeholder="Профессия" minlength="2" maxlength="200" required>
+                <input id="profession" class="form__input form__input_type_about" type="text" name="inputAbout" value=""
+                    placeholder="Профессия" minlength="2" maxlength="200" required>
                 <span id="error-profession" class="form__error-message form__error-message_hiden"></span>
                 <button class="form__submit form__submit_profile form__submit_type_disabled" type="submit">
                     Сохранить
@@ -88,7 +91,22 @@
             </form>
         </div>
     </div>
-
+    <!--  -->
+    <div class="popup popup_submit-avatar">
+        <div class="form form_submit-avatar">
+            <button class="form__close form__close_submit-avatar" type="button" aria-label="close"></button>
+            <h3 class="form__title">Обновить аватар</h3>
+            <form class="form__sending form__sending_submit-avatar" action="#" novalidate>
+                <input id="photo-url" class="form__input form__input_submit-avatar" type="url" name="avatar" value=""
+                    placeholder="Ссылка" required>
+                <span id="error-photo-url" class="form__error-message form__error-message_hiden"></span>
+                <button class="form__submit form__submit_foto form__submit_type_disabled" type="submit">
+                    Создать
+                </button>
+            </form>
+        </div>
+    </div>
+    <!--  -->
     <template id="card">
         <li class="card ">
             <img alt="фото" class="card__photo" src="#">
