@@ -41,7 +41,7 @@ export const containerViewPhotoTitle = document.querySelector('.container-view-p
 export const popupViewPhoto = '.popup_view_photo';
 export const popupConfirmationDelete = '.popup_confirmation-delete';
 export const buttonCardDelete = document.querySelector('.card__delete');
-export const buttonAvatar = document.querySelector('.profile__avatar');
+export const buttonAvatar = document.querySelector('.profile__btn-sbmt-photo');
 export const popupSelectorSubmitAvatar = '.popup_submit-avatar';
 
 
