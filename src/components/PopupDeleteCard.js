@@ -12,16 +12,12 @@ export default class PopupDeleteCard extends Popup {
         event.preventDefault();
         this._buttonSubmit.textContent = 'Сохранение...';
         await this._submitForm(this._id);
-        
     }
 
 
     setEventListeners() {
         super.setEventListeners();
-        this._form.addEventListener('submit',  this._deleteCard.bind(this));
-        
-
-        ;
+        this._form.addEventListener('submit', this._deleteCard.bind(this));
     }
 
     open(id) {

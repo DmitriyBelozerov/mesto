@@ -26,7 +26,10 @@ import {
     popupConfirmationDelete,
     formSubmitAvatar,
     buttonAvatar,
-    popupSelectorSubmitAvatar
+    popupSelectorSubmitAvatar,
+    formSubmitFoto,
+    btnSubmitAvatar,
+    btnSubmitProfile
 }
     from "../utils/constants.js";
 
@@ -57,6 +60,7 @@ const popupFormSubmitPhoto = new PopupWithForm({
             })
             .then(() => {
                 popupFormSubmitPhoto.close();
+                formSubmitFoto.textContent = 'Создать';
             })
             .catch(err => console.log(err))
     },
@@ -73,6 +77,7 @@ const popupWithFormProfile = new PopupWithForm({
                 })
                 .then(() => {
                     popupWithFormProfile.close();
+                    btnSubmitProfile.textContent = 'Сохранить';
                 })
                 .catch(err => console.log(err))
         }
@@ -142,6 +147,7 @@ const popupSubmitAvatar = new PopupWithForm({
             })
             .then(() => {
                 popupSubmitAvatar.close();
+                btnSubmitAvatar.textContent = 'Сохранить';
             })
             .catch(err => console.log(err))
     }

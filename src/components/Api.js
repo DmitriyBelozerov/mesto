@@ -7,13 +7,10 @@ export default class Api {
     }
 
     _getJsonOrError(res) {
-
         if (res.ok) {
             return res.json();
         }
         throw new Error('Ошибка при загрузке данных с сервера')
-
-
     }
 
 
@@ -67,7 +64,7 @@ export default class Api {
     }
 
 
-    
+
     deleteCard(id) {
         return fetch(`${this._urlCards}/${id}`, {
             method: 'DELETE',
