@@ -1,12 +1,7 @@
 export default class Api {
     constructor(config) {
-        this._urlProfile = config.urlProfile;
-        this._urlSaveProfile = config.urlSaveProfile
-        this._urlCards = config.urlCards;
-
         this._header = config.headers;
         this._baseUrl = config.baseUrl;
-
     }
 
     _getJsonOrError(res) {
