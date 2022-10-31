@@ -15,10 +15,6 @@ export const config = {
 };
 export const apiOptions = {
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-52",
-    urlProfile: "https://nomoreparties.co/v1/cohort-52/users/me",
-    urlSaveProfile: "https://mesto.nomoreparties.co/v1/cohort-52/users/me",
-    urlCards: "https://mesto.nomoreparties.co/v1/cohort-52/cards",
-    token: 'eedc1c72-62bc-4062-b0d7-5fb34f1900fa',
     headers: {
         authorization: 'eedc1c72-62bc-4062-b0d7-5fb34f1900fa',
         'Content-Type': 'application/json'

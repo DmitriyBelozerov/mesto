@@ -3,7 +3,10 @@ export default class Api {
         this._urlProfile = config.urlProfile;
         this._urlSaveProfile = config.urlSaveProfile
         this._urlCards = config.urlCards;
+
         this._header = config.headers;
+        this._baseUrl = config.baseUrl;
+
     }
 
     _getJsonOrError(res) {
@@ -15,7 +18,7 @@ export default class Api {
 
 
     getProfile() {
-        return fetch(this._urlProfile, {
+        return fetch(`${this._baseUrl}/users/me`, {
             headers: this._header,
         })
             .then(this._getJsonOrError)
@@ -23,14 +26,14 @@ export default class Api {
 
 
     getCards() {
-        return fetch(this._urlCards, {
+        return fetch(`${this._baseUrl}/cards`, {
             headers: this._header,
         })
             .then(this._getJsonOrError)
     }
 
     saveProfile(newName, newAbout) {
-        return fetch(this._urlSaveProfile, {
+        return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._header,
             body: JSON.stringify({
@@ -42,7 +45,7 @@ export default class Api {
     }
 
     createNewCard(newName, newLink) {
-        return fetch(this._urlCards, {
+        return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._header,
             body: JSON.stringify({
@@ -56,7 +59,7 @@ export default class Api {
 
 
     deleteCard(id) {
-        return fetch(`${this._urlCards}/${id}`, {
+        return fetch(`${this._baseUrl}/cards/${id}`, {
             method: 'DELETE',
             headers: this._header,
         })
@@ -64,7 +67,7 @@ export default class Api {
     }
 
     markLike(id) {
-        return fetch(`${this._urlCards}/${id}/likes`, {
+        return fetch(`${this._baseUrl}/cards/${id}/likes`, {
             method: 'PUT',
             headers: this._header,
         })
@@ -72,7 +75,7 @@ export default class Api {
     }
 
     deleteLike(id) {
-        return fetch(`${this._urlCards}/${id}/likes`, {
+        return fetch(`${this._baseUrl}/cards/${id}/likes`, {
             method: 'DELETE',
             headers: this._header,
         })
@@ -80,7 +83,7 @@ export default class Api {
     }
 
     submitAvatar(link) {
-        return fetch(`${this._urlSaveProfile}/avatar`, {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: this._header,
             body: JSON.stringify({
