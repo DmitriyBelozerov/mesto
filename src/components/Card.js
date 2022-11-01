@@ -14,7 +14,7 @@ export default class Card {
         this._userId = userId;
     }
 
-    getData(data) {
+    setData(data) {
         this._data = data;
         this._name = this._data.name;
         this._link = this._data.link;
@@ -59,12 +59,14 @@ export default class Card {
                     event.target.classList.add("card__like_active");
                     this._viewLikes(data.likes);
                 })
+                .catch(err => console.log(err))
         } else {
             this._deleteLike(this._id)
                 .then((data) => {
                     event.target.classList.remove("card__like_active");
                     this._viewLikes(data.likes);
                 })
+                .catch(err => console.log(err))
         }
     }
 

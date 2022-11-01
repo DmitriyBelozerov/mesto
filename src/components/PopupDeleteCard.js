@@ -7,11 +7,12 @@ export default class PopupDeleteCard extends Popup {
         this._buttonSubmit = this._popup.querySelector('.form__submit');
         this._form = this._popup.querySelector('.form__sending');
         this._deleteCard = this._deleteCard.bind(this);
+        this._loadingText = 'Удаление...';
     }
 
     _deleteCard(event) {
         event.preventDefault();
-        this._buttonSubmit.textContent = 'Сохранение...';
+        this.renderLoading(true);
         this._submitForm(this._id);
     }
 
@@ -27,4 +28,6 @@ export default class PopupDeleteCard extends Popup {
         super.close();
         document.removeEventListener('submit', this._deleteCard);
     }
+
+    
 }

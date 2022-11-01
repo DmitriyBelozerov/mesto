@@ -43,6 +43,8 @@ export const popupSelectorSubmitAvatar = '.popup_submit-avatar';
 export const formSubmitFoto = document.querySelector('.form__submit_foto');
 export const btnSubmitAvatar = document.querySelector('.form__submit_avatar');
 export const btnSubmitProfile = document.querySelector('.form__submit_profile');
+export const avatarSelector = '.profile__avatar';
+
 
 
 

@@ -29,25 +29,33 @@ import {
     popupSelectorSubmitAvatar,
     formSubmitFoto,
     btnSubmitAvatar,
-    btnSubmitProfile
+    btnSubmitProfile,
+    avatarSelector
 }
     from "../utils/constants.js";
 
 let userId = null;
 const api = new Api(apiOptions);
-const info = new UserInfo(nameProfile, aboutProfile);
+const info = new UserInfo(nameProfile, aboutProfile, avatarSelector);
 
 const section = new Section(
     { renderer: (item) => { section.addItem(createCard(item)) } },
     config.tasksList
 );
 
-api.getCards()
-    .then((data) => {
-        section.setItems(data)
+
+
+Promise.all([api.getCards(), api.getProfile()])
+    .then(([cardsData, userData]) => {
+        section.setItems(cardsData);
+        info.setUserInfo(userData.name, userData.about);
+        userId = userData._id;
+        info.submitAvatar(userData);
+    })
+    .then(()=>{
         section.renderAllElements();
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(`Ошибка: ${err}`))
 
 const popupFormSubmitPhoto = new PopupWithForm({
     popupSelector: popupAddPhoto,
@@ -56,13 +64,15 @@ const popupFormSubmitPhoto = new PopupWithForm({
             .then(data => {
                 section.addItem(
                     createCard(data)
-                )
+                );
             })
             .then(() => {
                 popupFormSubmitPhoto.close();
-                formSubmitFoto.textContent = 'Создать';
             })
             .catch(err => console.log(err))
+            .finally(() => {
+                popupFormSubmitPhoto.renderLoading(false)
+            })
     },
 })
 popupFormSubmitPhoto.setEventListeners();
@@ -77,40 +87,37 @@ const popupWithFormProfile = new PopupWithForm({
                 })
                 .then(() => {
                     popupWithFormProfile.close();
-                    btnSubmitProfile.textContent = 'Сохранить';
                 })
                 .catch(err => console.log(err))
+                .finally(() => {
+                    popupWithFormProfile.renderLoading(false)
+                })
         }
 });
 
 popupWithFormProfile.setEventListeners();
-
-api.getProfile()
-    .then((userData) => {
-        info.setUserInfo(userData.name, userData.about);
-        userId = userData._id;
-        info.submitAvatar(userData);
-    })
-    .catch(err => console.log(err))
 
 function handleCardClick(name, link) {
     popupWithImage.open(name, link);
 }
 
 function handleCardDelete(id, element) {
-    const popupDelete = new PopupDeleteCard(        {
-            popupSelector: popupConfirmationDelete,
-            submitForm: (id) => {
-                api.deleteCard(id)
-                    .then(() => {
-                        element.remove();
-                    })
-                    .then(() => {
-                        popupDelete.close();
-                    })
-                    .catch(err => console.log(err))
-            }
+    const popupDelete = new PopupDeleteCard({
+        popupSelector: popupConfirmationDelete,
+        submitForm: (id) => {
+            api.deleteCard(id)
+                .then(() => {
+                    element.remove();
+                })
+                .then(() => {
+                    popupDelete.close();
+                })
+                .catch(err => console.log(err))
+                .finally(() => {
+                    popupDelete.renderLoading(false)
+                })
         }
+    }
     );
     popupDelete.setEventListeners();
     popupDelete.open(id);
@@ -133,7 +140,7 @@ function createCard(data) {
         markLike,
         deleteLike
     );
-    newPhotoCard.getData(data);
+    newPhotoCard.setData(data);
     const cardElement = newPhotoCard.generateCard();
     return cardElement;
 }
@@ -147,9 +154,10 @@ const popupSubmitAvatar = new PopupWithForm({
             })
             .then(() => {
                 popupSubmitAvatar.close();
-                btnSubmitAvatar.textContent = 'Сохранить';
+                popupSubmitAvatar.renderLoading(false);
             })
             .catch(err => console.log(err))
+            .finally()
     }
 })
 
@@ -159,11 +167,11 @@ const popupWithImage = new PopupWithImage(popupViewPhoto);
 popupWithImage.setEventListeners();
 
 const validatorSendingFoto = new FormValidator(config, formSendingFoto);
-validatorSendingFoto.enableValidation(config);
+validatorSendingFoto.enableValidation();
 const validatorSendingProfile = new FormValidator(config, formSendingProfile);
-validatorSendingProfile.enableValidation(config);
+validatorSendingProfile.enableValidation();
 const validatorformSubmitAvatar = new FormValidator(config, formSubmitAvatar);
-validatorformSubmitAvatar.enableValidation(config);
+validatorformSubmitAvatar.enableValidation();
 
 profileEditButton.addEventListener("click", () => {
     const fillInputs = info.getUserInfo();
