@@ -27,10 +27,7 @@ import {
     formSubmitAvatar,
     buttonAvatar,
     popupSelectorSubmitAvatar,
-    formSubmitFoto,
-    btnSubmitAvatar,
-    btnSubmitProfile,
-    avatarSelector
+    avatarSelector,
 }
     from "../utils/constants.js";
 
@@ -39,11 +36,9 @@ const api = new Api(apiOptions);
 const info = new UserInfo(nameProfile, aboutProfile, avatarSelector);
 
 const section = new Section(
-    { renderer: (item) => { section.addItem(createCard(item)) } },
+    (item) => createCard(item),
     config.tasksList
 );
-
-
 
 Promise.all([api.getCards(), api.getProfile()])
     .then(([cardsData, userData]) => {
@@ -52,7 +47,7 @@ Promise.all([api.getCards(), api.getProfile()])
         userId = userData._id;
         info.submitAvatar(userData);
     })
-    .then(()=>{
+    .then(() => {
         section.renderAllElements();
     })
     .catch(err => console.log(`Ошибка: ${err}`))
@@ -62,9 +57,7 @@ const popupFormSubmitPhoto = new PopupWithForm({
     submitForm: (inputValues) => {
         api.createNewCard(inputValues.inputPhotoName, inputValues.inputPhotoUrl)
             .then(data => {
-                section.addItem(
-                    createCard(data)
-                );
+                section.addItem(data);
             })
             .then(() => {
                 popupFormSubmitPhoto.close();
@@ -94,33 +87,34 @@ const popupWithFormProfile = new PopupWithForm({
                 })
         }
 });
-
 popupWithFormProfile.setEventListeners();
+
+const popupDelete = new PopupDeleteCard({
+    popupSelector: popupConfirmationDelete,
+    submitForm: (id, element) => {
+        api.deleteCard(id)
+            .then(() => {
+                element.remove();
+            })
+            .then(() => {
+                popupDelete.close();
+            })
+            .catch(err => console.log(err))
+            .finally(() => {
+                popupDelete.renderLoading(false)
+            })
+    }
+}
+);
+popupDelete.setEventListeners();
+
 
 function handleCardClick(name, link) {
     popupWithImage.open(name, link);
 }
 
 function handleCardDelete(id, element) {
-    const popupDelete = new PopupDeleteCard({
-        popupSelector: popupConfirmationDelete,
-        submitForm: (id) => {
-            api.deleteCard(id)
-                .then(() => {
-                    element.remove();
-                })
-                .then(() => {
-                    popupDelete.close();
-                })
-                .catch(err => console.log(err))
-                .finally(() => {
-                    popupDelete.renderLoading(false)
-                })
-        }
-    }
-    );
-    popupDelete.setEventListeners();
-    popupDelete.open(id);
+    popupDelete.open(id, element);
 }
 
 function markLike(id) {
@@ -154,13 +148,13 @@ const popupSubmitAvatar = new PopupWithForm({
             })
             .then(() => {
                 popupSubmitAvatar.close();
-                popupSubmitAvatar.renderLoading(false);
             })
             .catch(err => console.log(err))
-            .finally()
+            .finally(() => {
+                popupSubmitAvatar.renderLoading(false);
+            })
     }
 })
-
 popupSubmitAvatar.setEventListeners();
 
 const popupWithImage = new PopupWithImage(popupViewPhoto);

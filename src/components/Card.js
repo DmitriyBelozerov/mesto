@@ -48,7 +48,7 @@ export default class Card {
             await this._handleCardDelete(this._id, this._element);
         }
         catch (error) {
-            console.log(`'Ошибочка при удалении' ${error}`);
+            console.log(`'Ошибочка при удалении: ' ${error}`);
         }
     }
 

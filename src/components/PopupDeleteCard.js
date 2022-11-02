@@ -13,10 +13,11 @@ export default class PopupDeleteCard extends Popup {
     _deleteCard(event) {
         event.preventDefault();
         this.renderLoading(true);
-        this._submitForm(this._id);
+        this._submitForm(this._id, this._element);
     }
 
-     open(id) {
+     open(id, element) {
+        this._element = element;
         super.open();
         this._buttonSubmit.textContent = 'Да';
         this._id = id;
